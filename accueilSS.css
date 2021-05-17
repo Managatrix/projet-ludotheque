@@ -1,0 +1,31 @@
+.title {
+    color: coral;
+    text-align: center;
+    padding-top: 10%;
+    padding-bottom: 15%;
+}
+.description {
+    text-align: center;
+    font-size: large;
+}
+nav.header ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #333;
+    height: 50px;
+}
+nav.header li {
+    float: left;
+    text-align: center;
+    padding: 14px;
+}
+nav.header a {
+    text-decoration: none;
+    display: block;
+    color: white;
+}
+nav.header li a:hover {
+    background-color: #111;
+}
