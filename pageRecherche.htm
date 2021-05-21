@@ -2,18 +2,91 @@
 <html lang="fr">
 
 <head>
-    <title>Ludotheque</title>
+    <title>Ludotheque - Recherche</title>
     <link rel="stylesheet" href="accueilSS.css">
+    <link rel="shortcut icon" href="favicon.ico">
 </head>
 
 <body>
     <nav class="header">
         <ul>
             <li><a href="pageAccueil.htm">Accueil</a></li>
-            <li><a href="pageRecherche.htm">Recherche</a></li>
-            <li><a href="pageCatalogue.htm">Catalogue</a></li>
+            <li><a href="pageConnexion.htm">Mes Réservations</a></li>
+            <li class="active"><a href="pageRecherche.htm">Recherche</a></li>
         </ul>
     </nav>
+    <table>
+        <tr>
+            <td>
+                <ul class="filtres">
+                    <li>
+                        <h4>Filtres</h4>
+                    </li>
+                    <li>
+                        <label for="">Nombre de personnes</label>
+                        <input class="inputBar" type="number" value="">
+                    </li>
+                    <li>
+                        <label for="">Type de jeu</label>
+                        <ul class="sousFiltres">
+                            <li><input type="checkbox"><label for="">Pour les enfants</label></li>
+                            <li><input type="checkbox"><label for="">Reflexion</label></li>
+                            <li><input type="checkbox"><label for="">Jeu de cartes</label></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <label for="">Disponibilité</label>
+                        <ul class="sousFiltres">
+                            <li><input type="checkbox"><label for="">En stock</label></li>
+                            <li><input type="checkbox"><label for="">Bientôt en stock</label></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <label for="">Tranche d'âge</label>
+                        <ul class="sousFiltres">
+                            <li>
+                                <label for="">Age min</label>
+                                <input class="inputBar" type="number" value="">
+                            </li>
+                            <li>
+                                <label for="">Age max</label>
+                                <input class="inputBar" type="number" value="">
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </td>
+            <td>
+                <div>
+                    <table>
+                        <tr>
+                            <td><input type="text"></td>
+                            <td><input type="submit" value="Recherche"></td>
+                        </tr>
+                        <tr>
+                            <table class="resultats">
+                                <tr>
+                                    <td><a href=""><img src="" alt="Jeu11"></a></td>
+                                    <td><a href=""><img src="" alt="Jeu12"></a></td>
+                                    <td><a href=""><img src="" alt="Jeu13"></a></td>
+                                </tr>
+                                <tr>
+                                    <td><a href=""><img src="" alt="Jeu21"></a></td>
+                                    <td><a href=""><img src="" alt="Jeu22"></a></td>
+                                    <td><a href=""><img src="" alt="Jeu23"></a></td>
+                                </tr>
+                                <tr>
+                                    <td><a href=""><img src="" alt="Jeu31"></a></td>
+                                    <td><a href=""><img src="" alt="Jeu32"></a></td>
+                                    <td><a href=""><img src="" alt="Jeu33"></a></td>
+                                </tr>
+                            </table>
+                        </tr>
+                    </table>
+                </div>
+            </td>
+        </tr>
+    </table>
 </body>
 
 </html>
