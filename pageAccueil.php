@@ -5,14 +5,15 @@
     <title>Ludotheque</title>
     <link rel="stylesheet" href="accueilSS.css">
     <link rel="shortcut icon" href="favicon.ico">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 
 <body>
     <nav class="header">
         <ul>
-            <li class="active"><a href="pageAccueil.htm">Accueil</a></li>
-            <li><a href="pageConnexion.htm">Mes Réservations</a></li>
-            <li><a href="pageRecherche.htm">Recherche</a></li>
+            <li class="active"><a href="pageAccueil.php">Accueil</a></li>
+            <li><a href="pageConnexion.php">Mes Réservations</a></li>
+            <li><a href="pageRecherche.php">Recherche</a></li>
         </ul>
     </nav>
     <h1 class="title">Votre ludothèque favorite</h1>

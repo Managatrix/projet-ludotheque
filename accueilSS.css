@@ -1,6 +1,7 @@
-body{
+body {
     margin: 0;
 }
+
 nav.header ul {
     list-style-type: none;
     margin: 0;
@@ -8,68 +9,90 @@ nav.header ul {
     overflow: hidden;
     background-color: #333;
 }
+
 nav.header li {
     float: left;
     border-right: 2px solid #bbb;
 }
-nav.header li.active{
+
+nav.header li.active {
     background-color: coral;
 }
+
 nav.header a {
     text-decoration: none;
     display: block;
     padding: 20px;
     color: white;
 }
+
 nav.header li a:hover {
     background-color: #cd5b45;
 }
+
+
 /* ^ HEADER NAVBAR ^ */
 
+
 /* PAGE ACCUEIL */
+
 h1.title {
     color: coral;
     text-align: center;
     margin-top: 10%;
     margin-bottom: 15%;
 }
-.description { /*changer le nom */
+
+.description {
+    /*changer le nom */
     text-align: center;
     font-size: large;
 }
 
-ul.carousel{
+ul.carousel {
     text-align: center;
 }
-ul.carousel li{
+
+ul.carousel li {
     display: inline;
 }
 
+
 /* PAGE CONNEXION */
-form.connexion{
+
+form.connexion {
     margin-top: 10%;
     text-align: center;
 }
-form.connexion div{
+
+form.connexion div {
     margin-bottom: 1%;
 }
 
+
 /* PAGE RECHERCHE */
-ul.filtres{
+
+ul.filtres {
     list-style: none;
     background-color: lightsalmon;
     border-radius: 5px;
+    padding: 0;
     /* margin-right: 5%; */
 }
-ul.sousFiltres{
+
+ul.sousFiltres {
     list-style: none;
 }
-input.inputBar{
+
+input.inputBar {
     width: 50px;
 }
+
+
 /* table.resultats{
     border: 1px solid;
 } */
+
 img.jeu {
     width: auto;
     height: 200px;
