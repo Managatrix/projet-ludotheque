@@ -46,13 +46,14 @@ h1.title {
     color: coral;
     text-align: center;
     margin-top: 10%;
-    margin-bottom: 15%;
+    margin-bottom: 12%;
+    font-size: 42px;
 }
 
-.description {
-    /*changer le nom */
+.new {
+    /*changer le nom ? */
     text-align: center;
-    font-size: large;
+    font-size: x-large;
 }
 
 ul.carousel {
@@ -115,6 +116,31 @@ img.jeu {
 
 /*PAGE ADMIN*/
 
-div.twoCol {
-    column-count: 2;
+div.col {
+    float: left;
+    width: 270px;
+    margin-left: 21%;
+}
+
+div.col ul {
+    list-style: none;
+    padding: 0;
+}
+
+div.col li {
+    margin-bottom: 5px;
+}
+
+div.col input {
+    float: right;
+    width: 160px;
+}
+
+input.submitButton {
+    margin-top: 10px;
+    margin-right: 25%;
+}
+
+div.col h3.formTitle {
+    text-align: center;
 }

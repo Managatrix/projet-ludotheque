@@ -17,8 +17,8 @@
             <li class="active" id="admin"><a href="pageAdmin.php">Admin</a></li>
         </ul>
     </nav>
-    <div class="twoCol">
-        <h3>Ajouter une nouvelle fiche de jeu</h3>
+    <div class="col">
+        <h3 class="formTitle">Ajouter une nouvelle fiche de jeu</h3>
         <form action="pageAdmin.php" method="post">
             <ul>
                 <li>
@@ -42,11 +42,13 @@
                     <input type="text" id="abstract" name="abstract">
                 </li>
                 <li>
-                    <input type="submit" value="Creer la fiche de jeu">
+                    <input type="submit" class="submitButton" value="Creer la fiche de jeu">
                 </li>
             </ul>
+    </div>
+    <div class="col">
         </form>
-        <h3>Ajouter un nouveau membre</h3>
+        <h3 class="formTitle">Ajouter un nouveau membre</h3>
         <form action="pageAdmin.php" method="post">
             <ul>
                 <li>
@@ -58,7 +60,7 @@
                     <input type="text" id="memberAddress" name="memberAddress">
                 </li>
                 <li>
-                    <input type="submit" value="Creer le membre">
+                    <input type="submit" class="submitButton" value="Creer le membre">
                 </li>
             </ul>
         </form>
