@@ -14,11 +14,12 @@
             <li><a href="pageAccueil.php">Accueil</a></li>
             <li><a href="pageConnexion.php">Mes Réservations</a></li>
             <li><a href="pageRecherche.php">Recherche</a></li>
+            <li id="admin"><a href="pageAdmin.php">Admin</a></li>
         </ul>
     </nav>
     <form class="connexion" action="" method="">
-        <div><label for="">Identifiant</label></div>
-        <div><input type="text"></div>
+        <div><label for="identifiant">Identifiant</label></div>
+        <div><input type="text" name="id" id="identifiant"></div>
         <div><input type="submit" value="Se Connecter"></div>
     </form>
 </body>

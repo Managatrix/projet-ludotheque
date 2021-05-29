@@ -14,6 +14,7 @@
             <li><a href="pageAccueil.php">Accueil</a></li>
             <li><a href="pageConnexion.php">Mes Réservations</a></li>
             <li class="active"><a href="pageRecherche.php">Recherche</a></li>
+            <li id="admin"><a href="pageAdmin.php">Admin</a></li>
         </ul>
     </nav>
     <table>
@@ -25,34 +26,34 @@
                             <h4>Filtres</h4>
                         </li>
                         <li>
-                            <label for="">Nombre de personnes</label>
-                            <input class="inputBar" name="nbPersonnes" type="number" value="">
+                            <label for="nbPersonnes">Nombre de personnes</label>
+                            <input class="inputBar" id="nbPersonnes" name="nbPersonnes" type="number" value="">
                         </li>
                         <li>
-                            <label for="">Type de jeu</label>
+                            <label>Type de jeu</label>
                             <ul class="sousFiltres">
-                                <li><input type="checkbox" name="checkEnfants"><label for="">Stratégie</label></li>
-                                <li><input type="checkbox" name="checkReflexion"><label for="">Rapidité</label></li>
-                                <li><input type="checkbox" name="checkCartes"><label for="">Puzzle</label></li>
+                                <li><input type="checkbox" id="checkStrategie" name="checkStrategie"><label for="checkStrategie">Stratégie</label></li>
+                                <li><input type="checkbox" id="checkRapidite" name="checkRapidite"><label for="checkRapidite">Rapidité</label></li>
+                                <li><input type="checkbox" id="checkPuzzle" name="checkPuzzle"><label for="checkPuzzle">Puzzle</label></li>
                             </ul>
                         </li>
                         <li>
-                            <label for="">Disponibilité</label>
+                            <label>Disponibilité</label>
                             <ul class="sousFiltres">
-                                <li><input type="checkbox" name="checkStock"><label for="">En stock</label></li>
-                                <li><input type="checkbox" name="checkAlmostStock"><label for="">Bientôt en stock</label></li>
+                                <li><input type="checkbox" id="checkStock" name="checkStock"><label for="checkStock">En stock</label></li>
+                                <li><input type="checkbox" id="checkAlmostStock" name="checkAlmostStock"><label for="checkAlmostStock">Bientôt en stock</label></li>
                             </ul>
                         </li>
                         <li>
-                            <label for="">Tranche d'âge</label>
+                            <label>Tranche d'âge</label>
                             <ul class="sousFiltres">
                                 <li>
-                                    <label for="">Age min</label>
-                                    <input class="inputBar" name="ageMin" type="number" value="">
+                                    <label for="ageMin">Age min</label>
+                                    <input class="inputBar" id="ageMin" name="ageMin" type="number" value="0">
                                 </li>
                                 <li>
-                                    <label for="">Age max</label>
-                                    <input class="inputBar" name="ageMax" type="number" value="">
+                                    <label for="ageMax">Age max</label>
+                                    <input class="inputBar" id="ageMax" name="ageMax" type="number" value="100">
                                 </li>
                             </ul>
                         </li>
@@ -93,9 +94,14 @@
                                     $nbColonnesMax = 2;
                                     //Traitement de la réponse
 
-                                    if (isset($_POST['ageMin']) && ) {
+
+
+                                    if (isset($_POST['ageMin']) && isset($_POST['ageMax'])) {
+                                    }
+
+                                    if (isset($_POST['ageMin']) && isset($_POST['ageMax'])) {
                                         while ($Data = mysqli_fetch_array($Result)) {
-                                            if ($Data[2] >= $_POST['ageMin']) {
+                                            if (($Data[2] >= $_POST['ageMin']) && ($Data[2] <= $_POST['ageMax'])) {
                                                 if ($nbColonnes < $nbColonnesMax) {
                                                     echo "
                                                     <td><a href=''><img class='jeu' title='$Data[1]' src='$Data[6]' alt='$Data[1]'></a></td>";

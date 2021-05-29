@@ -14,14 +14,15 @@
             <li class="active"><a href="pageAccueil.php">Accueil</a></li>
             <li><a href="pageConnexion.php">Mes Réservations</a></li>
             <li><a href="pageRecherche.php">Recherche</a></li>
+            <li id="admin"><a href="pageAdmin.php">Admin</a></li>
         </ul>
     </nav>
     <h1 class="title">Votre ludothèque favorite</h1>
     <h3 class="description">Nouveautés</h3>
     <ul class="carousel">
-        <li><a href=""><img src="" alt="Image1"></a></li>
-        <li><a href=""><img src="" alt="Image2"></a></li>
-        <li><a href=""><img src="" alt="Image3"></a></li>
+        <li><a href=""><img src="monopolyImage.jpg" alt="Image1"></a></li>
+        <li><a href=""><img src="jungleSpeedImage.jpg" alt="Image2"></a></li>
+        <li><a href=""><img src="puzzleCerfFantastiqueImage.jpg" alt="Image3"></a></li>
     </ul>
 </body>
 

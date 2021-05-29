@@ -30,6 +30,12 @@ nav.header li a:hover {
     background-color: #cd5b45;
 }
 
+nav.header li#admin {
+    float: right;
+    border-right: 0;
+    border-left: 2px solid #bbb;
+}
+
 
 /* ^ HEADER NAVBAR ^ */
 
@@ -51,10 +57,18 @@ h1.title {
 
 ul.carousel {
     text-align: center;
+    padding: 0;
 }
 
 ul.carousel li {
     display: inline;
+    margin-right: 200px;
+    margin-left: 200px;
+}
+
+.carousel img {
+    width: auto;
+    height: 200px;
 }
 
 
@@ -96,4 +110,11 @@ input.inputBar {
 img.jeu {
     width: auto;
     height: 200px;
+}
+
+
+/*PAGE ADMIN*/
+
+div.twoCol {
+    column-count: 2;
 }
