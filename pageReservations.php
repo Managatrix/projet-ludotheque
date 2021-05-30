@@ -2,7 +2,7 @@
 <html lang="fr">
 
 <head>
-    <title>Ludotheque - Recherche</title>
+    <title>Ludotheque - Mes Réservations</title>
     <link rel="stylesheet" href="accueilSS.css">
     <link rel="shortcut icon" href="favicon.ico">
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -12,8 +12,8 @@
     <nav class="header">
         <ul>
             <li><a href="pageAccueil.php">Accueil</a></li>
-            <li><a href="pageConnexion.php">Mes Réservations</a></li>
-            <li class="active"><a href="pageRecherche.php">Recherche</a></li>
+            <li class="active"><a href="pageConnexion.php">Mes Réservations</a></li>
+            <li><a href="pageRecherche.php">Recherche</a></li>
             <li id="admin"><a href="pageAdmin.php">Admin</a></li>
         </ul>
     </nav>

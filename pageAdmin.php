@@ -9,6 +9,25 @@
 </head>
 
 <body>
+
+    <?php
+    //paramètres de connexion à la base de données
+    $Server = "localhost";
+    $User = "root";
+    $Pwd = "";
+    $DB = "projet-ludotheque";
+    //connexion au serveur où se trouve la base de données
+    $Connect = mysqli_connect($Server, $User, $Pwd, $DB);
+    if (!$Connect) {
+        echo "Connexion à la base impossible";
+    }
+    //Ecriture de la requête
+    $Query = "SELECT COUNT(*) FROM game";
+    //Envoi de la requête
+    $Result = $Connect->query($Query);
+    $DataGame = mysqli_fetch_array($Result);
+    ?>
+
     <nav class="header">
         <ul>
             <li><a href="pageAccueil.php">Accueil</a></li>
@@ -39,12 +58,25 @@
                 </li>
                 <li>
                     <label for="abstract">Description</label>
-                    <input type="text" id="abstract" name="abstract">
+                    <textarea name="abstract" id="abstract" cols="21" rows="7"></textarea>
                 </li>
                 <li>
                     <input type="submit" class="submitButton" value="Creer la fiche de jeu">
                 </li>
             </ul>
+
+            <?php
+            if (isset($_POST['gameName'])) {
+                //Ecriture de la requête
+                $idJeu = $DataGame[0] + 1;
+                $imagePath = $_POST['gameName'] . "Image.jpg";
+                $Query = "INSERT INTO game (IDGame, Name, AgeMin, AgeMax, Type, Abstract, ImagePath, NbPersonnes) VALUES ($idJeu, $_POST[gameName], $_POST[minAge], $_POST[maxAge], $_POST[gameType], $_POST[abstract], $imagePath, NULL)";
+                echo $Query;
+                //Envoi de la requête
+                // $Connect->query($Query);
+            }
+            ?>
+
     </div>
     <div class="col">
         </form>
@@ -64,6 +96,21 @@
                 </li>
             </ul>
         </form>
+        <?php
+        $Query = "SELECT COUNT(*) FROM member";
+        //Envoi de la requête
+        $Result = $Connect->query($Query);
+        $DataMember = mysqli_fetch_array($Result);
+        if (isset($_POST['memberName'])) {
+            //Ecriture de la requête
+            $idMembre = $DataMember[0] + 1;
+            $Query = "INSERT INTO member (IDMember, Name, EMailAddress) VALUES ($idMembre, $_POST[memberName], $_POST[memberAddress])";
+            echo $Query;
+            //Envoi de la requête
+            // $Connect->query($Query);
+        }
+        mysqli_close($Connect);
+        ?>
     </div>
 </body>
 

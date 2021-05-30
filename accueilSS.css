@@ -136,6 +136,10 @@ div.col input {
     width: 160px;
 }
 
+div.col textarea {
+    float: right;
+}
+
 input.submitButton {
     margin-top: 10px;
     margin-right: 25%;
