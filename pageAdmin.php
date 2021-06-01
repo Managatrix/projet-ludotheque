@@ -6,10 +6,6 @@
     <link rel="stylesheet" href="accueilSS.css">
     <link rel="shortcut icon" href="favicon.ico">
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-</head>
-
-<body>
-
     <?php
     //paramètres de connexion à la base de données
     $Server = "localhost";
@@ -21,6 +17,12 @@
     if (!$Connect) {
         echo "Connexion à la base impossible";
     }
+    ?>
+</head>
+
+<body>
+
+    <?php
     //Ecriture de la requête
     $Query = "SELECT COUNT(*) FROM game";
     //Envoi de la requête
@@ -70,10 +72,13 @@
                 //Ecriture de la requête
                 $idJeu = $DataGame[0] + 1;
                 $imagePath = $_POST['gameName'] . "Image.jpg";
-                $Query = "INSERT INTO game (IDGame, Name, AgeMin, AgeMax, Type, Abstract, ImagePath, NbPersonnes) VALUES ($idJeu, $_POST[gameName], $_POST[minAge], $_POST[maxAge], $_POST[gameType], $_POST[abstract], $imagePath, NULL)";
+                $Query = "INSERT INTO game (IDGame, Name, AgeMin, AgeMax, Type, Abstract, ImagePath, NbPersonnes) VALUES ($idJeu, '$_POST[gameName]', $_POST[minAge], $_POST[maxAge], '$_POST[gameType]', '$_POST[abstract]', '$imagePath', NULL)";
                 echo $Query;
+                if (strpos($_POST['abstract'], "'") !== false) {
+                    echo "</br></br>Reqête invalide car apostrophe dans description";
+                }
                 //Envoi de la requête
-                // $Connect->query($Query);
+                $Connect->query($Query);
             }
             ?>
 
@@ -104,10 +109,10 @@
         if (isset($_POST['memberName'])) {
             //Ecriture de la requête
             $idMembre = $DataMember[0] + 1;
-            $Query = "INSERT INTO member (IDMember, Name, EMailAddress) VALUES ($idMembre, $_POST[memberName], $_POST[memberAddress])";
+            $Query = "INSERT INTO member (IDMember, Name, EMailAddress) VALUES ($idMembre, '$_POST[memberName]', '$_POST[memberAddress]')";
             echo $Query;
             //Envoi de la requête
-            // $Connect->query($Query);
+            $Connect->query($Query);
         }
         mysqli_close($Connect);
         ?>

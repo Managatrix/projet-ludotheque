@@ -6,6 +6,18 @@
     <link rel="stylesheet" href="accueilSS.css">
     <link rel="shortcut icon" href="favicon.ico">
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <?php
+    //paramètres de connexion à la base de données
+    $Server = "localhost";
+    $User = "root";
+    $Pwd = "";
+    $DB = "projet-ludotheque";
+    //connexion au serveur où se trouve la base de données
+    $Connect = mysqli_connect($Server, $User, $Pwd, $DB);
+    if (!$Connect) {
+        echo "Connexion à la base impossible";
+    }
+    ?>
 </head>
 
 <body>
@@ -23,17 +35,6 @@
         <div><input type="submit" value="Se Connecter"></div>
     </form>
     <?php
-    //paramètres de connexion à la base de données
-    $Server = "localhost";
-    $User = "root";
-    $Pwd = "";
-    $DB = "projet-ludotheque";
-    //connexion au serveur où se trouve la base de données
-    $Connect = mysqli_connect($Server, $User, $Pwd, $DB);
-    if (!$Connect) {
-        echo "Connexion à la base impossible";
-    }
-
     $Acces = false;
     if (isset($_POST['identifiant'])) {
         //Ecriture de la requête

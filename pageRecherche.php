@@ -6,6 +6,18 @@
     <link rel="stylesheet" href="accueilSS.css">
     <link rel="shortcut icon" href="favicon.ico">
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <?php
+    //paramètres de connexion à la base de données
+    $Server = "localhost";
+    $User = "root";
+    $Pwd = "";
+    $DB = "projet-ludotheque";
+    //connexion au serveur où se trouve la base de données
+    $Connect = mysqli_connect($Server, $User, $Pwd, $DB);
+    if (!$Connect) {
+        echo "Connexion à la base impossible";
+    }
+    ?>
 </head>
 
 <body>
@@ -25,16 +37,30 @@
                         <li>
                             <h4>Filtres</h4>
                         </li>
-                        <li>
+                        <!-- <li>
                             <label for="nbPersonnes">Nombre de personnes</label>
                             <input class="inputBar" id="nbPersonnes" name="nbPersonnes" type="number" value="">
-                        </li>
+                        </li> -->
                         <li>
                             <label>Type de jeu</label>
                             <ul class="sousFiltres">
-                                <li><input type="checkbox" id="checkStrategie" name="checkStrategie"><label for="checkStrategie">Stratégie</label></li>
+                                <?php
+                                $checks = array();
+                                //Ecriture de la requête
+                                $QueryTypes = "SELECT * FROM game";
+                                //Envoi de la requête
+                                $ResultTypes = $Connect->query($QueryTypes);
+                                while ($Data = mysqli_fetch_array($ResultTypes)) {
+                                    if (array_search($Data[4], $checks) === false) {
+                                        $idType = "check" . $Data[4];
+                                        echo "<li><input type='checkbox' id='$idType' name='$idType'><label for='$idType'>$Data[4]</label></li>";
+                                        array_push($checks, $Data[4]);
+                                    }
+                                }
+                                ?>
+                                <!-- <li><input type="checkbox" id="checkStrategie" name="checkStrategie"><label for="checkStrategie">Stratégie</label></li>
                                 <li><input type="checkbox" id="checkRapidite" name="checkRapidite"><label for="checkRapidite">Rapidité</label></li>
-                                <li><input type="checkbox" id="checkPuzzle" name="checkPuzzle"><label for="checkPuzzle">Puzzle</label></li>
+                                <li><input type="checkbox" id="checkPuzzle" name="checkPuzzle"><label for="checkPuzzle">Puzzle</label></li> -->
                             </ul>
                         </li>
                         <li>
@@ -67,39 +93,40 @@
                 <div>
                     <table>
                         <tr>
-                            <td><input type="text"></td>
-                            <td><input type="submit" value="Recherche"></td>
+                            <form action="pageRecherche.php" method="POST">
+                                <td><input type="text" id="recherche" name="recherche"></td>
+                                <td><input type="submit" value="Recherche"></td>
+                            </form>
                         </tr>
                         <tr>
                             <table class="resultats">
                                 <tr>
                                     <?php
-                                    //paramètres de connexion à la base de données
-                                    $Server = "localhost";
-                                    $User = "root";
-                                    $Pwd = "";
-                                    $DB = "projet-ludotheque";
-                                    //connexion au serveur où se trouve la base de données
-                                    $Connect = mysqli_connect($Server, $User, $Pwd, $DB);
-                                    if (!$Connect) {
-                                        echo "Connexion à la base impossible";
-                                    }
                                     //Ecriture de la requête
                                     $Query = "SELECT * FROM game";
                                     //Envoi de la requête
                                     $Result = $Connect->query($Query);
 
                                     $nbColonnes = 0;
-                                    $nbLignes = 0;
-                                    $nbColonnesMax = 2;
+                                    $nbColonnesMax = 3;
                                     //Traitement de la réponse
 
-
-
-                                    // if (isset($_POST['ageMin']) && isset($_POST['ageMax'])) {
-                                    // }
-
-                                    if (isset($_POST['ageMin']) && isset($_POST['ageMax'])) {
+                                    if (isset($_POST['recherche']) && $_POST['recherche']) {
+                                        $Result = $Connect->query($Query);
+                                        while ($Data = mysqli_fetch_array($Result)) {
+                                            if (stripos($Data[5], $_POST['recherche']) !== false) {
+                                                if ($nbColonnes < $nbColonnesMax) {
+                                                    echo "
+                                                <td><a href=''><img class='jeu' title='$Data[1]' src='$Data[6]' alt='$Data[1]'></a></td>";
+                                                    $nbColonnes++;
+                                                } else {
+                                                    echo "</tr><td><a href=''><img class='jeu' title='$Data[1]' src='$Data[6]' alt='$Data[1]'></a></td><tr>";
+                                                    $nbColonnes = 0;
+                                                }
+                                            }
+                                        }
+                                    } else if (isset($_POST['ageMin']) && isset($_POST['ageMax'])) {
+                                        $Result = $Connect->query($Query);
                                         while ($Data = mysqli_fetch_array($Result)) {
                                             if (($Data[2] >= $_POST['ageMin']) && ($Data[2] <= $_POST['ageMax'])) {
                                                 if ($nbColonnes < $nbColonnesMax) {
@@ -113,6 +140,7 @@
                                             }
                                         }
                                     } else {
+                                        $Result = $Connect->query($Query);
                                         while ($Data = mysqli_fetch_array($Result)) {
                                             if ($nbColonnes < $nbColonnesMax) {
                                                 echo "
