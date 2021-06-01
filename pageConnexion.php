@@ -41,15 +41,17 @@
         $Query = "SELECT * FROM member";
         //Envoi de la requête
         $Result = $Connect->query($Query);
-    }
-    while ($Data = mysqli_fetch_array($Result)) {
-        if ($_POST['identifiant'] == $Data[1]) {
-            $Acces = true;
-            header('Location: pageReservations.php');
+        while ($Data = mysqli_fetch_array($Result)) {
+            if ($_POST['identifiant'] == $Data[1]) {
+                $Acces = true;
+                header('Location: pageReservations.php');
+            }
         }
-    }
-    if ($Acces) {
-        header('Location: pageReservations.php');
+        if ($Acces) {
+            header('Location: pageReservations.php');
+        } else {
+            echo "<center>Connexion échouée</center>";
+        }
     }
     mysqli_close($Connect);
     ?>

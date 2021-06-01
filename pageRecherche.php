@@ -31,7 +31,7 @@
     </nav>
     <table>
         <tr>
-            <td>
+            <td id="filtresBox">
                 <ul class="filtres">
                     <form action="pageRecherche.php" method="POST">
                         <li>
@@ -53,23 +53,20 @@
                                 while ($Data = mysqli_fetch_array($ResultTypes)) {
                                     if (array_search($Data[4], $checks) === false) {
                                         $idType = "check" . $Data[4];
-                                        echo "<li><input type='checkbox' id='$idType' name='$idType'><label for='$idType'>$Data[4]</label></li>";
+                                        echo "<li><input type='checkbox' id='$idType' name='$idType' checked><label for='$idType'>$Data[4]</label></li>";
                                         array_push($checks, $Data[4]);
                                     }
                                 }
                                 ?>
-                                <!-- <li><input type="checkbox" id="checkStrategie" name="checkStrategie"><label for="checkStrategie">Stratégie</label></li>
-                                <li><input type="checkbox" id="checkRapidite" name="checkRapidite"><label for="checkRapidite">Rapidité</label></li>
-                                <li><input type="checkbox" id="checkPuzzle" name="checkPuzzle"><label for="checkPuzzle">Puzzle</label></li> -->
                             </ul>
                         </li>
-                        <li>
+                        <!-- <li>
                             <label>Disponibilité</label>
                             <ul class="sousFiltres">
                                 <li><input type="checkbox" id="checkStock" name="checkStock"><label for="checkStock">En stock</label></li>
                                 <li><input type="checkbox" id="checkAlmostStock" name="checkAlmostStock"><label for="checkAlmostStock">Bientôt en stock</label></li>
                             </ul>
-                        </li>
+                        </li> -->
                         <li>
                             <label>Tranche d'âge</label>
                             <ul class="sousFiltres">
@@ -108,25 +105,31 @@
                                     $Result = $Connect->query($Query);
 
                                     $nbColonnes = 0;
-                                    $nbColonnesMax = 3;
+                                    $nbColonnesMax = 4;
                                     //Traitement de la réponse
 
+
+                                    // /!\ UTILISER DES REQUETES PRECISES AU LIEU DE TRIER AVEC PHP
+
+                                    // /!\ UTILISER AJAX POUR LES FONCTION ONCLICK
+
+
                                     if (isset($_POST['recherche']) && $_POST['recherche']) {
-                                        $Result = $Connect->query($Query);
                                         while ($Data = mysqli_fetch_array($Result)) {
                                             if (stripos($Data[5], $_POST['recherche']) !== false) {
                                                 if ($nbColonnes < $nbColonnesMax) {
                                                     echo "
-                                                <td><a href=''><img class='jeu' title='$Data[1]' src='$Data[6]' alt='$Data[1]'></a></td>";
+                                                    <td><a href=''><img class='jeu' title='$Data[1]' src='$Data[6]' alt='$Data[1]'></a></td>";
                                                     $nbColonnes++;
                                                 } else {
-                                                    echo "</tr><td><a href=''><img class='jeu' title='$Data[1]' src='$Data[6]' alt='$Data[1]'></a></td><tr>";
+                                                    echo "</tr><tr>
+                                                    <td><a href=''><img class='jeu' title='$Data[1]' src='$Data[6]' alt='$Data[1]'></a></td>";
                                                     $nbColonnes = 0;
                                                 }
                                             }
                                         }
+                                        print_r($checks);
                                     } else if (isset($_POST['ageMin']) && isset($_POST['ageMax'])) {
-                                        $Result = $Connect->query($Query);
                                         while ($Data = mysqli_fetch_array($Result)) {
                                             if (($Data[2] >= $_POST['ageMin']) && ($Data[2] <= $_POST['ageMax'])) {
                                                 if ($nbColonnes < $nbColonnesMax) {
@@ -134,21 +137,22 @@
                                                     <td><a href=''><img class='jeu' title='$Data[1]' src='$Data[6]' alt='$Data[1]'></a></td>";
                                                     $nbColonnes++;
                                                 } else {
-                                                    echo "</tr><td><a href=''><img class='jeu' title='$Data[1]' src='$Data[6]' alt='$Data[1]'></a></td><tr>";
+                                                    echo "</tr><tr>
+                                                    <td><a href=''><img class='jeu' title='$Data[1]' src='$Data[6]' alt='$Data[1]'></a></td>";
                                                     $nbColonnes = 0;
                                                 }
                                             }
                                         }
                                     } else {
-                                        $Result = $Connect->query($Query);
                                         while ($Data = mysqli_fetch_array($Result)) {
                                             if ($nbColonnes < $nbColonnesMax) {
                                                 echo "
                                                 <td><a href=''><img class='jeu' title='$Data[1]' src='$Data[6]' alt='$Data[1]'></a></td>";
                                                 $nbColonnes++;
                                             } else {
-                                                echo "</tr><td><a href=''><img class='jeu' title='$Data[1]' src='$Data[6]' alt='$Data[1]'></a></td><tr>";
-                                                $nbColonnes = 0;
+                                                echo "</tr><tr>
+                                                <td><a href=''><img class='jeu' title='$Data[1]' src='$Data[6]' alt='$Data[1]'></a></td>";
+                                                $nbColonnes = 1;
                                             }
                                         }
                                     }
@@ -159,6 +163,8 @@
                     </table>
                 </div>
             </td>
+            <?php
+            ?>
         </tr>
     </table>
     <?php

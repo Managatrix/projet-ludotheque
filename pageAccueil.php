@@ -23,6 +23,7 @@
         <li><a href=""><img src="monopolyImage.jpg" alt="Image1"></a></li>
         <li><a href=""><img src="jungleSpeedImage.jpg" alt="Image2"></a></li>
         <li><a href=""><img src="puzzleCerfFantastiqueImage.jpg" alt="Image3"></a></li>
+        <li><a href=""><img src="PokerImage.jpg" alt="Image4"></a></li>
     </ul>
 </body>
 

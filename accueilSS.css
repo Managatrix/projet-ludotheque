@@ -45,8 +45,8 @@ nav.header li#admin {
 h1.title {
     color: coral;
     text-align: center;
-    margin-top: 10%;
-    margin-bottom: 12%;
+    margin-top: 7%;
+    margin-bottom: 7%;
     font-size: 42px;
 }
 
@@ -54,6 +54,7 @@ h1.title {
     /*changer le nom ? */
     text-align: center;
     font-size: x-large;
+    margin-bottom: 5%;
 }
 
 ul.carousel {
@@ -63,13 +64,13 @@ ul.carousel {
 
 ul.carousel li {
     display: inline;
-    margin-right: 200px;
-    margin-left: 200px;
+    margin-right: 4%;
+    margin-left: 4%;
 }
 
 .carousel img {
     width: auto;
-    height: 200px;
+    height: 350px;
 }
 
 
@@ -86,6 +87,10 @@ form.connexion div {
 
 
 /* PAGE RECHERCHE */
+
+td#filtresBox {
+    vertical-align: top;
+}
 
 ul.filtres {
     list-style: none;
@@ -107,6 +112,23 @@ img.jeu {
     width: auto;
     height: 200px;
 }
+
+
+/* button.imgButton {
+    border: 0px;
+    background-color: transparent;
+} */
+
+
+/* table {
+    border: 5px solid greenyellow;
+    margin: 10px;
+}
+
+table tr td {
+    border: 5px solid black;
+    padding: 10px;
+} */
 
 
 /*PAGE ADMIN*/
