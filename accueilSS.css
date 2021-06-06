@@ -47,7 +47,7 @@ h1.title {
     color: coral;
     text-align: center;
     margin-top: 7%;
-    margin-bottom: 7%;
+    margin-bottom: 5%;
     font-size: 42px;
 }
 
@@ -55,7 +55,7 @@ h1.title {
     /*changer le nom ? */
     text-align: center;
     font-size: x-large;
-    margin-bottom: 5%;
+    margin-bottom: 4%;
 }
 
 ul.carousel {
@@ -91,13 +91,15 @@ form.connexion div {
 
 td#filtresBox {
     vertical-align: top;
+    padding-left: 5px;
+    width: 200px;
 }
 
 ul.filtres {
     list-style: none;
     background-color: lightsalmon;
     border-radius: 5px;
-    padding: 0;
+    padding: 0px 15px 5px 15px;
 }
 
 ul.sousFiltres {
@@ -106,6 +108,7 @@ ul.sousFiltres {
 
 input.inputBar {
     width: 50px;
+    float: right;
 }
 
 img.jeu {

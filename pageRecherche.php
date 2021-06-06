@@ -5,28 +5,7 @@
     <title>Ludotheque - Recherche</title>
     <link rel="stylesheet" href="accueilSS.css">
     <link rel="shortcut icon" href="favicon.ico">
-
     <script src="reservation.js"></script>
-    <!-- <script type="text/javascript">
-        function afficherJeu(idJeu) {
-            document.getElementById("nomJeuSelectionne").innerHTML = document.getElementById(idJeu).title;
-            document.getElementById("descriptionJeuSelectionne").innerHTML = document.getElementById(idJeu).title;
-            localStorage.setItem("id", document.getElementById(idJeu).title);
-        }
-
-        window.addEventListener("DOMContentLoaded", (event) => {
-            if (localStorage.getItem('id')) {
-                document.getElementById("nomJeuSelectionne").innerHTML = localStorage.getItem('id');
-            }
-            let i = 1;
-            let jeuStr = "jeu";
-            while (document.getElementById(jeuStr.concat(i)) !== null) {
-                document.getElementById(jeuStr.concat(i)).addEventListener('click', afficherJeu.bind(this, jeuStr.concat(i)), false);
-                // .bind to adjust the scope of the function/parameters
-                i++;
-            }
-        })
-    </script> -->
 
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <?php
@@ -67,42 +46,20 @@
                         <li>
                             <label>Type de jeu</label>
                             <ul class="sousFiltres">
-                                <script>
-                                    let gamesArray = [0]; //Initialisation avec 0 pour que l'indice corresponde avec l'IDGame
-                                    let gameObject = [];
-                                </script>
                                 <?php
                                 $checks = array();
+                                // $numCheck = 1;
+
                                 //Ecriture de la requête
                                 $QueryTypes = "SELECT * FROM game";
-                                //Envoi de la requête
-                                $Result = $Connect->query($QueryTypes);
-                                while ($Data = mysqli_fetch_array($Result)) {
-
-                                    // $Data = mysqli_fetch_array($ResultTypes);
-                                ?>
-
-                                    <script>
-                                        gameObject = {
-                                            IDGame: <?php echo $Data[0]; ?>,
-                                            Name: "<?php echo $Data[1]; ?>",
-                                            AgeMin: <?php echo $Data[2]; ?>,
-                                            AgeMax: <?php echo $Data[3]; ?>,
-                                            Type: "<?php echo $Data[4]; ?>",
-                                            Abstract: "<?php echo $Data[5]; ?>"
-                                        }
-                                        gamesArray.push(gameObject);
-                                        // console.log(gamesArray);
-                                    </script>
-
-                                <?php
-                                }
+                                //Envoi de la requête                                
                                 $ResultTypes = $Connect->query($QueryTypes);
                                 while ($Data = mysqli_fetch_array($ResultTypes)) { // Create checkbox filters according to DB
-                                    if (array_search($Data[4], $checks) === false) {
+                                    if (array_search($Data[4], $checks) === false) { //Checks if type isn't already present in $checks array
                                         $idType = "check" . $Data[4];
-                                        echo "<li><input type='checkbox' id='$idType' name='$idType' checked><label for='$idType'>$Data[4]</label></li>";
+                                        echo "<li><input type='checkbox' id='$idType' name='checkbox[]' value='$Data[4]'><label for='$idType'>$Data[4]</label></li>";
                                         array_push($checks, $Data[4]);
+                                        // $numCheck++;
                                     }
                                 }
                                 ?>
@@ -146,6 +103,11 @@
                         <tr>
                             <table class="resultats">
                                 <tr>
+                                    <script>
+                                        let gamesArray = [0]; //Initialisation avec 0 pour que l'indice corresponde avec l'IDGame
+                                        let gameObject = [];
+                                    </script>
+
                                     <?php
                                     //Ecriture de la requête
                                     $Query = "SELECT * FROM game";
@@ -158,61 +120,145 @@
                                     //Traitement de la réponse
 
 
-                                    // /!\ UTILISER DES REQUETES PRECISES AU LIEU DE TRIER AVEC PHP
+                                    // /!\ UTILISER DES REQUETES PRECISES AU LIEU DE FILTRER AVEC PHP
 
                                     // /!\ UTILISER AJAX POUR LES FONCTION ONCLICK
 
 
-                                    if (isset($_POST['recherche']) && $_POST['recherche']) {
+                                    if (isset($_POST['recherche'])) {
+
+
+                                        $Query = "SELECT * FROM game WHERE Abstract LIKE '%$_POST[recherche]%' OR Name like '%$_POST[recherche]%' OR Type LIKE '%$_POST[recherche]%'";
+                                        $Result = $Connect->query($Query);
                                         while ($Data = mysqli_fetch_array($Result)) {
-                                            if (stripos($Data[5], $_POST['recherche']) !== false) {
-                                                if ($nbColonnes < $nbColonnesMax) {
-                                                    echo "
-                                                    <td><a href=''><img class='jeu' title='$Data[1]' src='$Data[6]' alt='$Data[1]'></a></td>";
-                                                    $nbColonnes++;
-                                                } else {
-                                                    echo "</tr><tr>
-                                                    <td><a href=''><img class='jeu' title='$Data[1]' src='$Data[6]' alt='$Data[1]'></a></td>";
-                                                    $nbColonnes = 0;
+                                    ?>
+
+                                            <script>
+                                                gameObject = {
+                                                    IDGame: <?php echo $Data[0]; ?>,
+                                                    Name: "<?php echo $Data[1]; ?>",
+                                                    AgeMin: <?php echo $Data[2]; ?>,
+                                                    AgeMax: <?php echo $Data[3]; ?>,
+                                                    Type: "<?php echo $Data[4]; ?>",
+                                                    Abstract: "<?php echo $Data[5]; ?>"
                                                 }
-                                            }
+                                                gamesArray.push(gameObject);
+                                            </script>
+
+                                        <?php
                                         }
-                                        print_r($checks);
-                                    } else if (isset($_POST['ageMin']) && isset($_POST['ageMax'])) {
-                                        while ($Data = mysqli_fetch_array($Result)) {
-                                            if (($Data[2] >= $_POST['ageMin']) && ($Data[2] <= $_POST['ageMax'])) {
-                                                if ($nbColonnes < $nbColonnesMax) {
-                                                    echo "
-                                                    <td><a href=''><img class='jeu' title='$Data[1]' src='$Data[6]' alt='$Data[1]'></a></td>";
-                                                    $nbColonnes++;
-                                                } else {
-                                                    echo "</tr><tr>
-                                                    <td><a href=''><img class='jeu' title='$Data[1]' src='$Data[6]' alt='$Data[1]'></a></td>";
-                                                    $nbColonnes = 0;
-                                                }
-                                            }
-                                        }
-                                    } else {
+                                        $Result = $Connect->query($Query);
                                         while ($Data = mysqli_fetch_array($Result)) {
                                             if ($nbColonnes < $nbColonnesMax) {
                                                 $stringIDJeu = "jeu" . $numJeu;
-                                                $stringHref = "#" . $Data[1];
-                                                $stringHrefAlt = "?idJeu=" . $Data[0];
+                                                $stringHref = "#?idJeu=" . $Data[0];
                                                 echo "
-                                                <td><a href='$stringHrefAlt'><img id='$stringIDJeu' class='jeu' title='$Data[1]' src='$Data[6]' alt='$Data[1]'></a></td>";
+                                                    <td><a href='$stringHref'><img id='$stringIDJeu' class='jeu' title='$Data[1]' src='$Data[6]' alt='$Data[1]'></a></td>";
                                                 $nbColonnes++;
                                                 $numJeu++;
                                             } else {
                                                 $stringIDJeu = "jeu" . $numJeu;
-                                                $stringHref = "#" . $Data[1];
-                                                $stringHrefAlt = "?idJeu=" . $Data[0];
+                                                $stringHref = "#?idJeu=" . $Data[0];
                                                 echo "</tr><tr>
-                                                <td><a href='$stringHrefAlt'><img id='$stringIDJeu' class='jeu' title='$Data[1]' src='$Data[6]' alt='$Data[1]'></a></td>";
+                                                    <td><a href='$stringHref'><img id='$stringIDJeu' class='jeu' title='$Data[1]' src='$Data[6]' alt='$Data[1]'></a></td>";
+                                                $nbColonnes = 1;
+                                                $numJeu++;
+                                            }
+                                        }
+                                    } else if (isset($_POST['ageMin'])) {
+
+                                        $checkboxSQL = "";
+                                        if (isset($_POST['checkbox'])) {
+                                            foreach ($_POST["checkbox"] as $index => $checkbox) {
+                                                if ($checkboxSQL == "") {
+                                                    $checkboxSQL = "AND Type IN ('";
+                                                }
+                                                $checkboxSQL .= $checkbox . "', '";
+                                            }
+                                            if ($checkboxSQL != "") {
+                                                $checkboxSQL = rtrim($checkboxSQL, ", '");
+                                                $checkboxSQL .= "')";
+                                            }
+                                        }
+
+                                        $Query = "SELECT * FROM game WHERE AgeMin >= $_POST[ageMin] AND AgeMax <= $_POST[ageMax] " . $checkboxSQL;
+
+                                        $Result = $Connect->query($Query);
+                                        while ($Data = mysqli_fetch_array($Result)) {
+                                        ?>
+
+                                            <script>
+                                                gameObject = {
+                                                    IDGame: <?php echo $Data[0]; ?>,
+                                                    Name: "<?php echo $Data[1]; ?>",
+                                                    AgeMin: <?php echo $Data[2]; ?>,
+                                                    AgeMax: <?php echo $Data[3]; ?>,
+                                                    Type: "<?php echo $Data[4]; ?>",
+                                                    Abstract: "<?php echo $Data[5]; ?>"
+                                                }
+                                                gamesArray.push(gameObject);
+                                            </script>
+
+                                        <?php
+                                        }
+                                        $Result = $Connect->query($Query);
+                                        while ($Data = mysqli_fetch_array($Result)) {
+                                            if ($nbColonnes < $nbColonnesMax) {
+                                                $stringIDJeu = "jeu" . $numJeu;
+                                                $stringHref = "#?idJeu=" . $Data[0];
+                                                echo "
+                                                    <td><a href='$stringHref'><img id='$stringIDJeu' class='jeu' title='$Data[1]' src='$Data[6]' alt='$Data[1]'></a></td>";
+                                                $nbColonnes++;
+                                                $numJeu++;
+                                            } else {
+                                                $stringIDJeu = "jeu" . $numJeu;
+                                                $stringHref = "#?idJeu=" . $Data[0];
+                                                echo "</tr><tr>
+                                                    <td><a href='$stringHref'><img id='$stringIDJeu' class='jeu' title='$Data[1]' src='$Data[6]' alt='$Data[1]'></a></td>";
+                                                $nbColonnes = 1;
+                                                $numJeu++;
+                                            }
+                                        }
+                                    } else {
+                                        $Query = "SELECT * FROM game";
+                                        $Result = $Connect->query($Query);
+                                        while ($Data = mysqli_fetch_array($Result)) {
+                                        ?>
+
+                                            <script>
+                                                gameObject = {
+                                                    IDGame: <?php echo $Data[0]; ?>,
+                                                    Name: "<?php echo $Data[1]; ?>",
+                                                    AgeMin: <?php echo $Data[2]; ?>,
+                                                    AgeMax: <?php echo $Data[3]; ?>,
+                                                    Type: "<?php echo $Data[4]; ?>",
+                                                    Abstract: "<?php echo $Data[5]; ?>"
+                                                }
+                                                gamesArray.push(gameObject);
+                                            </script>
+
+                                    <?php
+                                        }
+                                        $Result = $Connect->query($Query);
+                                        while ($Data = mysqli_fetch_array($Result)) {
+                                            if ($nbColonnes < $nbColonnesMax) {
+                                                $stringIDJeu = "jeu" . $numJeu;
+                                                $stringHref = "#?idJeu=" . $Data[0];
+                                                echo "
+                                                <td><a href='$stringHref'><img id='$stringIDJeu' class='jeu' title='$Data[1]' src='$Data[6]' alt='$Data[1]'></a></td>";
+                                                $nbColonnes++;
+                                                $numJeu++;
+                                            } else {
+                                                $stringIDJeu = "jeu" . $numJeu;
+                                                $stringHref = "#?idJeu=" . $Data[0];
+                                                echo "</tr><tr>
+                                                <td><a href='$stringHref'><img id='$stringIDJeu' class='jeu' title='$Data[1]' src='$Data[6]' alt='$Data[1]'></a></td>";
                                                 $nbColonnes = 1;
                                                 $numJeu++;
                                             }
                                         }
                                     }
+
                                     ?>
                                 </tr>
                             </table>

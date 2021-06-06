@@ -18,7 +18,7 @@
         </ul>
     </nav>
     <h1 class="title">Votre ludothèque favorite</h1>
-    <h2 class="new">Nouveautés</h2>
+    <h2 class="new">Nouveautés : </h2>
     <ul class="carousel">
         <li><a href=""><img src="monopolyImage.jpg" alt="Image1"></a></li>
         <li><a href=""><img src="jungleSpeedImage.jpg" alt="Image2"></a></li>
