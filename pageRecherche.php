@@ -5,6 +5,29 @@
     <title>Ludotheque - Recherche</title>
     <link rel="stylesheet" href="accueilSS.css">
     <link rel="shortcut icon" href="favicon.ico">
+
+    <script src="reservation.js"></script>
+    <!-- <script type="text/javascript">
+        function afficherJeu(idJeu) {
+            document.getElementById("nomJeuSelectionne").innerHTML = document.getElementById(idJeu).title;
+            document.getElementById("descriptionJeuSelectionne").innerHTML = document.getElementById(idJeu).title;
+            localStorage.setItem("id", document.getElementById(idJeu).title);
+        }
+
+        window.addEventListener("DOMContentLoaded", (event) => {
+            if (localStorage.getItem('id')) {
+                document.getElementById("nomJeuSelectionne").innerHTML = localStorage.getItem('id');
+            }
+            let i = 1;
+            let jeuStr = "jeu";
+            while (document.getElementById(jeuStr.concat(i)) !== null) {
+                document.getElementById(jeuStr.concat(i)).addEventListener('click', afficherJeu.bind(this, jeuStr.concat(i)), false);
+                // .bind to adjust the scope of the function/parameters
+                i++;
+            }
+        })
+    </script> -->
+
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <?php
     //paramètres de connexion à la base de données
@@ -18,7 +41,6 @@
         echo "Connexion à la base impossible";
     }
     ?>
-    <script src="reservation.js"></script>
 </head>
 
 <body>
@@ -45,13 +67,38 @@
                         <li>
                             <label>Type de jeu</label>
                             <ul class="sousFiltres">
+                                <script>
+                                    let gamesArray = [0]; //Initialisation avec 0 pour que l'indice corresponde avec l'IDGame
+                                    let gameObject = [];
+                                </script>
                                 <?php
                                 $checks = array();
                                 //Ecriture de la requête
                                 $QueryTypes = "SELECT * FROM game";
                                 //Envoi de la requête
+                                $Result = $Connect->query($QueryTypes);
+                                while ($Data = mysqli_fetch_array($Result)) {
+
+                                    // $Data = mysqli_fetch_array($ResultTypes);
+                                ?>
+
+                                    <script>
+                                        gameObject = {
+                                            IDGame: <?php echo $Data[0]; ?>,
+                                            Name: "<?php echo $Data[1]; ?>",
+                                            AgeMin: <?php echo $Data[2]; ?>,
+                                            AgeMax: <?php echo $Data[3]; ?>,
+                                            Type: "<?php echo $Data[4]; ?>",
+                                            Abstract: "<?php echo $Data[5]; ?>"
+                                        }
+                                        gamesArray.push(gameObject);
+                                        // console.log(gamesArray);
+                                    </script>
+
+                                <?php
+                                }
                                 $ResultTypes = $Connect->query($QueryTypes);
-                                while ($Data = mysqli_fetch_array($ResultTypes)) {
+                                while ($Data = mysqli_fetch_array($ResultTypes)) { // Create checkbox filters according to DB
                                     if (array_search($Data[4], $checks) === false) {
                                         $idType = "check" . $Data[4];
                                         echo "<li><input type='checkbox' id='$idType' name='$idType' checked><label for='$idType'>$Data[4]</label></li>";
@@ -150,15 +197,17 @@
                                             if ($nbColonnes < $nbColonnesMax) {
                                                 $stringIDJeu = "jeu" . $numJeu;
                                                 $stringHref = "#" . $Data[1];
+                                                $stringHrefAlt = "?idJeu=" . $Data[0];
                                                 echo "
-                                                <td><a href='$stringHref'><img id='$stringIDJeu' class='jeu' title='$Data[1]' src='$Data[6]' alt='$Data[1]'></a></td>";
+                                                <td><a href='$stringHrefAlt'><img id='$stringIDJeu' class='jeu' title='$Data[1]' src='$Data[6]' alt='$Data[1]'></a></td>";
                                                 $nbColonnes++;
                                                 $numJeu++;
                                             } else {
                                                 $stringIDJeu = "jeu" . $numJeu;
                                                 $stringHref = "#" . $Data[1];
+                                                $stringHrefAlt = "?idJeu=" . $Data[0];
                                                 echo "</tr><tr>
-                                                <td><a href='$stringHref'><img id='$stringIDJeu' class='jeu' title='$Data[1]' src='$Data[6]' alt='$Data[1]'></a></td>";
+                                                <td><a href='$stringHrefAlt'><img id='$stringIDJeu' class='jeu' title='$Data[1]' src='$Data[6]' alt='$Data[1]'></a></td>";
                                                 $nbColonnes = 1;
                                                 $numJeu++;
                                             }
@@ -178,13 +227,26 @@
 
     </table>
     <div class="rcolumn">
+        <h4>Jeu selectionné : </h4>
+        <p id="nomJeuSelectionne"></p>
+        <h4>Description : </h4>
+        <p id="descriptionJeuSelectionne"></p>
+        <h4>Type de jeu : </h4>
+        <p id="typeJeuSelectionne"></p>
+        <h4>Tranche d'age : </h4>
+        <p id="trancheAgeJeuSelectionne"></p>
         <form action="pageRecherche.php" method="post">
-            <h4>Jeu selectionné : </h4>
-            <p id="nomJeuSelectionne"></p>
             <input type="submit" name="reserveButton" id="reserveButton" value="Réserver">
         </form>
     </div>
     <?php
+    if (isset($_POST["reserveButton"])) {
+        echo $_GET['idJeu'];
+        $Query = "INSERT INTO booking (IDMember, IDGame, Date, ReturnDate) VALUES ($_GET[idJeu], 2, 2021-06-06, 2021-07-06)";
+        // $Connect->query($Query);
+        echo "Reservation pour 1 mois prise en compte";
+    }
+
     // while($Data = mysqli_fetch_array($Result))
     // {
     //     echo "IDGame : $Data[0], Name : $Data[1], AgeMin : $Data[2], AgeMax : $Data[3], Type : $Data[4], Abstract : $Data[5], ImagePath : $Data[6]</br></br>";
