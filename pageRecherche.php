@@ -18,6 +18,7 @@
         echo "Connexion à la base impossible";
     }
     ?>
+    <script src="reservation.js"></script>
 </head>
 
 <body>
@@ -29,7 +30,7 @@
             <li id="admin"><a href="pageAdmin.php">Admin</a></li>
         </ul>
     </nav>
-    <table>
+    <table class="lcolumn">
         <tr>
             <td id="filtresBox">
                 <ul class="filtres">
@@ -106,6 +107,7 @@
 
                                     $nbColonnes = 0;
                                     $nbColonnesMax = 4;
+                                    $numJeu = 1;
                                     //Traitement de la réponse
 
 
@@ -146,13 +148,19 @@
                                     } else {
                                         while ($Data = mysqli_fetch_array($Result)) {
                                             if ($nbColonnes < $nbColonnesMax) {
+                                                $stringIDJeu = "jeu" . $numJeu;
+                                                $stringHref = "#" . $Data[1];
                                                 echo "
-                                                <td><a href=''><img class='jeu' title='$Data[1]' src='$Data[6]' alt='$Data[1]'></a></td>";
+                                                <td><a href='$stringHref'><img id='$stringIDJeu' class='jeu' title='$Data[1]' src='$Data[6]' alt='$Data[1]'></a></td>";
                                                 $nbColonnes++;
+                                                $numJeu++;
                                             } else {
+                                                $stringIDJeu = "jeu" . $numJeu;
+                                                $stringHref = "#" . $Data[1];
                                                 echo "</tr><tr>
-                                                <td><a href=''><img class='jeu' title='$Data[1]' src='$Data[6]' alt='$Data[1]'></a></td>";
+                                                <td><a href='$stringHref'><img id='$stringIDJeu' class='jeu' title='$Data[1]' src='$Data[6]' alt='$Data[1]'></a></td>";
                                                 $nbColonnes = 1;
+                                                $numJeu++;
                                             }
                                         }
                                     }
@@ -163,10 +171,19 @@
                     </table>
                 </div>
             </td>
-            <?php
-            ?>
-        </tr>
+            <td>
+            </td>
+
+            <!-- </tr> -->
+
     </table>
+    <div class="rcolumn">
+        <form action="pageRecherche.php" method="post">
+            <h4>Jeu selectionné : </h4>
+            <p id="nomJeuSelectionne"></p>
+            <input type="submit" name="reserveButton" id="reserveButton" value="Réserver">
+        </form>
+    </div>
     <?php
     // while($Data = mysqli_fetch_array($Result))
     // {

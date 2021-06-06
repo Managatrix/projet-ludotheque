@@ -97,7 +97,6 @@ ul.filtres {
     background-color: lightsalmon;
     border-radius: 5px;
     padding: 0;
-    /* margin-right: 5%; */
 }
 
 ul.sousFiltres {
@@ -129,6 +128,17 @@ table tr td {
     border: 5px solid black;
     padding: 10px;
 } */
+
+table.lcolumn {
+    float: left;
+}
+
+div.rcolumn {
+    float: right;
+    margin-right: 250px;
+    padding-left: 20px;
+    border-left: 5px solid #333;
+}
 
 
 /*PAGE ADMIN*/

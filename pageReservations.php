@@ -96,8 +96,6 @@
                                     $nbColonnesMax = 2;
                                     //Traitement de la réponse
 
-                                    // if (isset($_POST['ageMin']) && isset($_POST['ageMax'])) {
-                                    // }
 
                                     if (isset($_POST['ageMin']) && isset($_POST['ageMax'])) {
                                         while ($Data = mysqli_fetch_array($Result)) {
