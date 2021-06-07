@@ -19,6 +19,7 @@
     if (!$Connect) {
         echo "Connexion à la base impossible";
     }
+    session_start();
     ?>
 </head>
 
@@ -102,6 +103,11 @@
                                     </script>
 
                                     <?php
+                                    if (isset($_GET['member'])) {
+                                        $currentMemberName = $_GET['member'];
+                                        $_SESSION['memberName'] = $currentMemberName;
+                                    }
+
                                     //Ecriture de la requête
                                     $Query = "SELECT * FROM game";
                                     //Envoi de la requête
@@ -117,7 +123,7 @@
 
 
                                     if (isset($_POST['recherche'])) {
-                                        $Query = "SELECT * FROM game INNER JOIN booking ON game.IDGame = booking.IDGame INNER JOIN member ON member.IDMember = booking.IDMember WHERE member.Name = '$_GET[member]' AND Abstract LIKE '%$_POST[recherche]%' OR game.Name like '%$_POST[recherche]%' OR Type LIKE '%$_POST[recherche]%'";
+                                        $Query = "SELECT * FROM game INNER JOIN booking ON game.IDGame = booking.IDGame INNER JOIN member ON member.IDMember = booking.IDMember WHERE (member.Name = '$_SESSION[memberName]') AND (Abstract LIKE '%$_POST[recherche]%' OR game.Name like '%$_POST[recherche]%' OR Type LIKE '%$_POST[recherche]%')";
                                         $Result = $Connect->query($Query);
                                         while ($Data = mysqli_fetch_array($Result)) {
                                     ?>
@@ -170,7 +176,7 @@
                                             }
                                         }
 
-                                        $Query = "SELECT * FROM game INNER JOIN booking ON game.IDGame = booking.IDGame INNER JOIN member ON member.IDMember = booking.IDMember WHERE member.Name = '$_GET[member]' AND AgeMin >= $_POST[ageMin] AND AgeMax <= $_POST[ageMax] " . $checkboxSQL;
+                                        $Query = "SELECT * FROM game INNER JOIN booking ON game.IDGame = booking.IDGame INNER JOIN member ON member.IDMember = booking.IDMember WHERE member.Name = '$_SESSION[memberName]' AND AgeMin >= $_POST[ageMin] AND AgeMax <= $_POST[ageMax] " . $checkboxSQL;
 
                                         $Result = $Connect->query($Query);
                                         while ($Data = mysqli_fetch_array($Result)) {
@@ -209,7 +215,7 @@
                                             }
                                         }
                                     } else {
-                                        $Query = "SELECT * FROM game INNER JOIN booking ON game.IDGame = booking.IDGame INNER JOIN member ON member.IDMember = booking.IDMember WHERE member.Name = '$_GET[member]'";
+                                        $Query = "SELECT * FROM game INNER JOIN booking ON game.IDGame = booking.IDGame INNER JOIN member ON member.IDMember = booking.IDMember WHERE member.Name = '$_SESSION[memberName]'";
                                         $Result = $Connect->query($Query);
                                         while ($Data = mysqli_fetch_array($Result)) {
                                         ?>
@@ -275,6 +281,8 @@
     // {
     //     echo "IDGame : $Data[0], Name : $Data[1], AgeMin : $Data[2], AgeMax : $Data[3], Type : $Data[4], Abstract : $Data[5], ImagePath : $Data[6]</br></br>";
     // }
+
+    // session_abort();
     mysqli_close($Connect);
     ?>
 </body>
