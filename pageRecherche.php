@@ -290,7 +290,7 @@
     <?php
     if (isset($_POST["reserveButton"])) {
         if ($_POST['identifiant'] == null) {
-            echo "Il faut se connecter";
+            echo "<center class='failure'>Il faut se connecter !</center>";
         } else {
             $Query = "SELECT Name FROM member WHERE Name = '$_POST[identifiant]'";
             $Result = $Connect->query($Query);
@@ -298,11 +298,12 @@
                 $today = date('Y-m-d');
                 $tomorrowRaw = mktime(0, 0, 0, date('m') + 1, date('d'), date('Y'));
                 $tomorrow = date('Y-m-d', $tomorrowRaw);
-                $Query = "INSERT INTO booking (IDMember, IDGame, Date, ReturnDate) VALUES (1, $_GET[idJeu], '$today', '$tomorrow')";
+
+                $Query = "INSERT INTO booking (IDMember, IDGame, Date, ReturnDate) VALUES ($_POST[identifiant], $_GET[idJeu], '$today', '$tomorrow')";
                 $Connect->query($Query);
-                echo "<center>Reservation pour 1 mois prise en compte</center>";
+                echo "<center class='success'>Reservation pour 1 mois prise en compte</center>";
             } else {
-                echo "<center>Connexion échouée</center>";
+                echo "<center class='failure'>Connexion échouée</center>";
             }
         }
     }
