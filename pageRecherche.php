@@ -35,7 +35,7 @@
         <tr>
             <td id="filtresBox">
                 <ul class="filtres">
-                    <form action="pageRecherche.php" method="POST">
+                    <form action="" method="POST">
                         <li>
                             <h4>Filtres</h4>
                         </li>
@@ -48,8 +48,6 @@
                             <ul class="sousFiltres">
                                 <?php
                                 $checks = array();
-                                // $numCheck = 1;
-
                                 //Ecriture de la requête
                                 $QueryTypes = "SELECT * FROM game";
                                 //Envoi de la requête                                
@@ -59,7 +57,6 @@
                                         $idType = "check" . $Data[4];
                                         echo "<li><input type='checkbox' id='$idType' name='checkbox[]' value='$Data[4]'><label for='$idType'>$Data[4]</label></li>";
                                         array_push($checks, $Data[4]);
-                                        // $numCheck++;
                                     }
                                 }
                                 ?>
@@ -95,7 +92,7 @@
                 <div>
                     <table>
                         <tr>
-                            <form action="pageRecherche.php" method="POST">
+                            <form action="" method="POST">
                                 <td><input type="text" id="recherche" name="recherche"></td>
                                 <td><input type="submit" value="Recherche"></td>
                             </form>
@@ -119,15 +116,10 @@
                                     $numJeu = 1;
                                     //Traitement de la réponse
 
-
-                                    // /!\ UTILISER DES REQUETES PRECISES AU LIEU DE FILTRER AVEC PHP
-
                                     // /!\ UTILISER AJAX POUR LES FONCTION ONCLICK
 
 
                                     if (isset($_POST['recherche'])) {
-
-
                                         $Query = "SELECT * FROM game WHERE Abstract LIKE '%$_POST[recherche]%' OR Name like '%$_POST[recherche]%' OR Type LIKE '%$_POST[recherche]%'";
                                         $Result = $Connect->query($Query);
                                         while ($Data = mysqli_fetch_array($Result)) {
@@ -258,7 +250,6 @@
                                             }
                                         }
                                     }
-
                                     ?>
                                 </tr>
                             </table>

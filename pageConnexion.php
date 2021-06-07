@@ -41,9 +41,10 @@
         $Result = $Connect->query($Query);
 
         if (mysqli_num_rows($Result) != 0) {
-            header('Location: pageReservations.php');
+            $locationString = "Location: pageReservations.php?member=".$_POST['identifiant'];
+            header($locationString);
         } else {
-            echo "<center>Connexion échouée</center>";
+            echo "<center class='failure'>Connexion échouée</center>";
         }
     }
     mysqli_close($Connect);
