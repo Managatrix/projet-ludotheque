@@ -3,6 +3,25 @@ body {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 
+input[type=submit] {
+    background-color: #e7e7e7;
+    border: solid 1px;
+    padding: 10px 10px;
+    margin: 10px 0px;
+    text-align: center;
+    cursor: pointer;
+    transition-duration: 200ms;
+}
+
+input[type=submit]:hover {
+    background-color: darkgrey;
+}
+
+input.searchBar {
+    padding-top: 9px;
+    padding-bottom: 9px;
+}
+
 center.failure {
     font-weight: bold;
     font-size: larger;
@@ -14,6 +33,12 @@ center.success {
     font-size: large;
     color: darkgreen;
 }
+
+
+/* ^ WHOLE SITE ^ */
+
+
+/* HEADER NAVBAR */
 
 nav.header ul {
     list-style-type: none;
@@ -37,6 +62,7 @@ nav.header a {
     display: block;
     padding: 20px;
     color: white;
+    transition-duration: 200ms;
 }
 
 nav.header li a:hover {
@@ -48,9 +74,6 @@ nav.header li#admin {
     border-right: 0;
     border-left: 2px solid #bbb;
 }
-
-
-/* ^ HEADER NAVBAR ^ */
 
 
 /* PAGE ACCUEIL */
@@ -90,7 +113,7 @@ ul.carousel li {
 /* PAGE CONNEXION */
 
 form.connexion {
-    margin-top: 10%;
+    margin-top: 7%;
     text-align: center;
 }
 
@@ -128,25 +151,14 @@ img.jeu {
     height: 200px;
 }
 
-
-/* button.imgButton {
-    border: 0px;
-    background-color: transparent;
-} */
-
-
-/* table {
-    border: 5px solid greenyellow;
-    margin: 10px;
-}
-
-table tr td {
-    border: 5px solid black;
+table.resultats tr td {
     padding: 10px;
-} */
+    text-align: center;
+}
 
 table.lcolumn {
     float: left;
+    margin: 10px;
 }
 
 div.rcolumn {

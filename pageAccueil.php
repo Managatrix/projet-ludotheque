@@ -3,7 +3,7 @@
 
 <head>
     <title>Ludotheque</title>
-    <link rel="stylesheet" href="accueilSS.css">
+    <link rel="stylesheet" href="stylesheet.css">
     <link rel="shortcut icon" href="favicon.ico">
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
@@ -20,10 +20,10 @@
     <h1 class="title">Votre ludothèque favorite</h1>
     <h2 class="new">Nouveautés : </h2>
     <ul class="carousel">
-        <li><a href=""><img src="monopolyImage.jpg" alt="Image1"></a></li>
-        <li><a href=""><img src="jungleSpeedImage.jpg" alt="Image2"></a></li>
-        <li><a href=""><img src="puzzleCerfFantastiqueImage.jpg" alt="Image3"></a></li>
-        <li><a href=""><img src="PokerImage.jpg" alt="Image4"></a></li>
+        <li><a href="pageRecherche.php"><img src="monopolyImage.jpg" alt="Image1"></a></li>
+        <li><a href="pageRecherche.php"><img src="jungleSpeedImage.jpg" alt="Image2"></a></li>
+        <li><a href="pageRecherche.php"><img src="puzzleCerfFantastiqueImage.jpg" alt="Image3"></a></li>
+        <li><a href="pageRecherche.php"><img src="PokerImage.jpg" alt="Image4"></a></li>
     </ul>
 </body>
 

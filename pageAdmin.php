@@ -3,7 +3,7 @@
 
 <head>
     <title>Ludotheque - Admin</title>
-    <link rel="stylesheet" href="accueilSS.css">
+    <link rel="stylesheet" href="stylesheet.css">
     <link rel="shortcut icon" href="favicon.ico">
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <?php

@@ -3,7 +3,7 @@
 
 <head>
     <title>Ludotheque - Mes Réservations</title>
-    <link rel="stylesheet" href="accueilSS.css">
+    <link rel="stylesheet" href="stylesheet.css">
     <link rel="shortcut icon" href="favicon.ico">
     <script src="afficherInfos.js"></script>
 
@@ -80,7 +80,7 @@
                             </ul>
                         </li>
                         <li>
-                            <input type="submit" value="OK">
+                            <input type="submit" value="Filtrer">
                         </li>
                     </form>
                 </ul>
@@ -90,7 +90,7 @@
                     <table>
                         <tr>
                             <form action="" method="POST">
-                                <td><input type="text" id="recherche" name="recherche"></td>
+                                <td><input type="text" id="recherche" name="recherche" class="searchBar"></td>
                                 <td><input type="submit" value="Recherche"></td>
                             </form>
                         </tr>

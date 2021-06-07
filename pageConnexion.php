@@ -3,7 +3,7 @@
 
 <head>
     <title>Ludotheque - Connexion</title>
-    <link rel="stylesheet" href="accueilSS.css">
+    <link rel="stylesheet" href="stylesheet.css">
     <link rel="shortcut icon" href="favicon.ico">
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <?php
@@ -29,6 +29,7 @@
             <li id="admin"><a href="pageAdmin.php">Admin</a></li>
         </ul>
     </nav>
+    <h1 class="title">Mon espace reservations</h1>
     <form class="connexion" action="" method="post">
         <div><label for="identifiant">Identifiant</label></div>
         <div><input type="text" name="identifiant" id="identifiant"></div>
