@@ -282,18 +282,29 @@
         <h4>Tranche d'age : </h4>
         <p id="trancheAgeJeuSelectionne"></p>
         <form action="" method="post">
+            <label for="identifiant">Identifiant</label>
+            <input type="text" name="identifiant" id="identifiant">
             <input type="submit" name="reserveButton" id="reserveButton" value="Réserver">
         </form>
     </div>
     <?php
     if (isset($_POST["reserveButton"])) {
-        $today = date('Y-m-d');
-        $tomorrowRaw = mktime(0, 0, 0, date('m')+1, date('d'), date('Y'));
-        $tomorrow = date('Y-m-d', $tomorrowRaw);
-        $Query = "INSERT INTO booking (IDMember, IDGame, Date, ReturnDate) VALUES (1, $_GET[idJeu], '$today', '$tomorrow')";
-        // echo $Query;
-        $Connect->query($Query);
-        echo "</br>Reservation pour 1 mois prise en compte";
+        if ($_POST['identifiant'] == null) {
+            echo "Il faut se connecter";
+        } else {
+            $Query = "SELECT Name FROM member WHERE Name = '$_POST[identifiant]'";
+            $Result = $Connect->query($Query);
+            if (mysqli_num_rows($Result) != 0) { //If successful connexion
+                $today = date('Y-m-d');
+                $tomorrowRaw = mktime(0, 0, 0, date('m') + 1, date('d'), date('Y'));
+                $tomorrow = date('Y-m-d', $tomorrowRaw);
+                $Query = "INSERT INTO booking (IDMember, IDGame, Date, ReturnDate) VALUES (1, $_GET[idJeu], '$today', '$tomorrow')";
+                $Connect->query($Query);
+                echo "<center>Reservation pour 1 mois prise en compte</center>";
+            } else {
+                echo "<center>Connexion échouée</center>";
+            }
+        }
     }
 
     // while($Data = mysqli_fetch_array($Result))

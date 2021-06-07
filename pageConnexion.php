@@ -37,17 +37,10 @@
     <?php
     $Acces = false;
     if (isset($_POST['identifiant'])) {
-        //Ecriture de la requête
-        $Query = "SELECT * FROM member";
-        //Envoi de la requête
+        $Query = "SELECT Name FROM member WHERE Name = '$_POST[identifiant]'";
         $Result = $Connect->query($Query);
-        while ($Data = mysqli_fetch_array($Result)) {
-            if ($_POST['identifiant'] == $Data[1]) {
-                $Acces = true;
-                header('Location: pageReservations.php');
-            }
-        }
-        if ($Acces) {
+
+        if (mysqli_num_rows($Result) != 0) {
             header('Location: pageReservations.php');
         } else {
             echo "<center>Connexion échouée</center>";
