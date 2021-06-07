@@ -287,10 +287,6 @@
     </div>
     <?php
     if (isset($_POST["returnButton"])) {
-        $today = date('Y-m-d');
-        $tomorrowRaw = mktime(0, 0, 0, date('m') + 1, date('d'), date('Y'));
-        $tomorrow = date('Y-m-d', $tomorrowRaw);
-
         $Query = "SELECT IDMember FROM member WHERE Name = '$_SESSION[memberName]'"; //Correspondance IDMember avec Name
         $Result = $Connect->query($Query);
         $idMember = mysqli_fetch_array($Result);

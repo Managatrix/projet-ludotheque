@@ -286,7 +286,7 @@
         } else {
             $Query = "SELECT Name FROM member WHERE Name = '$_POST[identifiant]'";
             $Result = $Connect->query($Query);
-            if (mysqli_num_rows($Result) != 0) { //If successful connexion
+            if (mysqli_num_rows($Result) != 0) { //If connexion successful
                 $today = date('Y-m-d');
                 $tomorrowRaw = mktime(0, 0, 0, date('m') + 1, date('d'), date('Y'));
                 $tomorrow = date('Y-m-d', $tomorrowRaw);
@@ -295,9 +295,15 @@
                 $Result = $Connect->query($Query);
                 $idMember = mysqli_fetch_array($Result);
 
-                $Query = "INSERT INTO booking (IDMember, IDGame, Date, ReturnDate) VALUES ($idMember[0], $_GET[idJeu], '$today', '$tomorrow')";
-                $Connect->query($Query);
-                echo "<center class='success'>Reservation pour 1 mois prise en compte</center>";
+                $Query = "SELECT IDGame FROM booking WHERE IDMember = $idMember[0] AND IDGame = $_GET[idJeu]";
+                $Result = $Connect->query($Query);
+                if (mysqli_num_rows($Result) != 0) {
+                    echo "<center class='failure'>Echec de la réservation : vous avez déjà réservé ce jeu</center>";
+                } else {
+                    $Query = "INSERT INTO booking (IDMember, IDGame, Date, ReturnDate) VALUES ($idMember[0], $_GET[idJeu], '$today', '$tomorrow')";
+                    $Connect->query($Query);
+                    echo "<center class='success'>Reservation pour 1 mois prise en compte</center>";
+                }
             } else {
                 echo "<center class='failure'>Connexion échouée</center>";
             }
