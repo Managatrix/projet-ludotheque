@@ -214,12 +214,18 @@
 
                 $Query = "SELECT IDGame FROM booking WHERE IDMember = $idMember[0] AND IDGame = $_GET[idJeu]";
                 $Result = $Connect->query($Query);
-                if (mysqli_num_rows($Result) != 0) {
+                if (mysqli_num_rows($Result) != 0) { //If game already booked by user
                     echo "<center class='failure'>Echec de la réservation : vous avez déjà réservé ce jeu</center>";
                 } else {
-                    $Query = "INSERT INTO booking (IDMember, IDGame, Date, ReturnDate) VALUES ($idMember[0], $_GET[idJeu], '$today', '$tomorrow')";
-                    $Connect->query($Query);
-                    echo "<center class='success'>Reservation pour 1 mois prise en compte</center>";
+                    $Query = "SELECT IDGame FROM booking WHERE IDMember = $idMember[0]";
+                    $Result = $Connect->query($Query);
+                    if (mysqli_num_rows($Result) >= 3) { //If member has already more than 3 bookings
+                        echo "<center class='failure'>Echec de la reservation : vous avez déjà 3 réservations</center>";
+                    } else {
+                        $Query = "INSERT INTO booking (IDMember, IDGame, Date, ReturnDate) VALUES ($idMember[0], $_GET[idJeu], '$today', '$tomorrow')";
+                        $Connect->query($Query);
+                        echo "<center class='success'>Reservation pour 1 mois prise en compte</center>";
+                    }
                 }
             } else {
                 echo "<center class='failure'>Connexion échouée</center>";
