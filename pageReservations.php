@@ -107,8 +107,9 @@
                                     //Envoi de la requête
                                     $Result = $Connect->query($Query);
 
-                                    $nbColonnes = 0;
                                     $nbColonnesMax = 4;
+
+                                    $nbColonnes = 0;
                                     $numJeu = 1;
                                     //Traitement de la réponse
 

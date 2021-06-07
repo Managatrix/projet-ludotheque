@@ -111,8 +111,9 @@
                                     //Envoi de la requête
                                     $Result = $Connect->query($Query);
 
+                                    $nbColonnesMax = 5;
+
                                     $nbColonnes = 0;
-                                    $nbColonnesMax = 4;
                                     $numJeu = 1;
                                     //Traitement de la réponse
 
@@ -290,7 +291,12 @@
                 $tomorrowRaw = mktime(0, 0, 0, date('m') + 1, date('d'), date('Y'));
                 $tomorrow = date('Y-m-d', $tomorrowRaw);
 
-                $Query = "INSERT INTO booking (IDMember, IDGame, Date, ReturnDate) VALUES ($_POST[identifiant], $_GET[idJeu], '$today', '$tomorrow')";
+                $Query = "SELECT IDMember FROM member WHERE Name = '$_POST[identifiant]'"; //Correspondance IDMember avec Name
+                $Result = $Connect->query($Query);
+                $idMember = mysqli_fetch_array($Result);
+
+                $Query = "INSERT INTO booking (IDMember, IDGame, Date, ReturnDate) VALUES ($idMember[0], $_GET[idJeu], '$today', '$tomorrow')";
+                echo $Query;
                 $Connect->query($Query);
                 echo "<center class='success'>Reservation pour 1 mois prise en compte</center>";
             } else {
