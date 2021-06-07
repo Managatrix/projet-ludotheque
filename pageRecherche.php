@@ -114,7 +114,7 @@
 
                                     if (isset($_POST['recherche'])) {
                                         $Query = "SELECT * FROM game WHERE Abstract LIKE '%$_POST[recherche]%' OR Name like '%$_POST[recherche]%' OR Type LIKE '%$_POST[recherche]%'";
-                                    } else if (isset($_POST['ageMin'])) {
+                                    } else if (isset($_POST['ageMin'])) { //Création de la requête filtrée par les checkboxes
                                         $checkboxSQL = "";
                                         if (isset($_POST['checkbox'])) {
                                             foreach ($_POST["checkbox"] as $index => $checkbox) {
@@ -156,14 +156,14 @@
                                     while ($Data = mysqli_fetch_array($Result)) {
                                         if ($nbColonnes < $nbColonnesMax) {
                                             $stringIDJeu = "jeu" . $numJeu;
-                                            $stringHref = "?idJeu=" . $Data[0];
+                                            $stringHref = "#?idJeu=" . $Data[0];
                                             echo "
                                             <td><a href='$stringHref'><img id='$stringIDJeu' class='jeu' title='$Data[1]' src='$Data[6]' alt='$Data[1]'></a></td>";
                                             $nbColonnes++;
                                             $numJeu++;
                                         } else {
                                             $stringIDJeu = "jeu" . $numJeu;
-                                            $stringHref = "?idJeu=" . $Data[0];
+                                            $stringHref = "#?idJeu=" . $Data[0];
                                             echo "</tr><tr>
                                             <td><a href='$stringHref'><img id='$stringIDJeu' class='jeu' title='$Data[1]' src='$Data[6]' alt='$Data[1]'></a></td>";
                                             $nbColonnes = 1;

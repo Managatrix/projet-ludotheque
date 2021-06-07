@@ -159,14 +159,14 @@
                                     while ($Data = mysqli_fetch_array($Result)) {
                                         if ($nbColonnes < $nbColonnesMax) {
                                             $stringIDJeu = "jeu" . $numJeu;
-                                            $stringHref = "?idJeu=" . $Data[0];
+                                            $stringHref = "#?idJeu=" . $Data[0];
                                             echo "
                                             <td><a href='$stringHref'><img id='$stringIDJeu' class='jeu' title='$Data[1]' src='$Data[6]' alt='$Data[1]'></a></td>";
                                             $nbColonnes++;
                                             $numJeu++;
                                         } else {
                                             $stringIDJeu = "jeu" . $numJeu;
-                                            $stringHref = "?idJeu=" . $Data[0];
+                                            $stringHref = "#?idJeu=" . $Data[0];
                                             echo "</tr><tr>
                                             <td><a href='$stringHref'><img id='$stringIDJeu' class='jeu' title='$Data[1]' src='$Data[6]' alt='$Data[1]'></a></td>";
                                             $nbColonnes = 1;
