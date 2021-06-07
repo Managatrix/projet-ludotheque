@@ -217,7 +217,10 @@
                                     } else {
                                         $Query = "SELECT * FROM game INNER JOIN booking ON game.IDGame = booking.IDGame INNER JOIN member ON member.IDMember = booking.IDMember WHERE member.Name = '$_SESSION[memberName]'";
                                         $Result = $Connect->query($Query);
+                                        $QueryBooking = "SELECT * FROM booking";
+                                        $ResultBooking = $Connect->query($QueryBooking);
                                         while ($Data = mysqli_fetch_array($Result)) {
+                                            $DataBooking = mysqli_fetch_array($ResultBooking);
                                         ?>
 
                                             <script>
@@ -227,7 +230,8 @@
                                                     AgeMin: <?php echo $Data[2]; ?>,
                                                     AgeMax: <?php echo $Data[3]; ?>,
                                                     Type: "<?php echo $Data[4]; ?>",
-                                                    Abstract: "<?php echo $Data[5]; ?>"
+                                                    Abstract: "<?php echo $Data[5]; ?>",
+                                                    DateRetour: "<?php echo $DataBooking[4]; ?>"
                                                 }
                                                 gamesArray.push(gameObject);
                                             </script>
@@ -275,6 +279,8 @@
         <p id="typeJeuSelectionne"></p>
         <h4>Tranche d'age : </h4>
         <p id="trancheAgeJeuSelectionne"></p>
+        <h4>Date de retour : </h4>
+        <p id="dateRetourJeuSelectionne"></p>
         <form action="" method="post">
             <input type="submit" name="returnButton" id="returnButton" value="Retourner le jeu">
         </form>
