@@ -1,5 +1,4 @@
-function afficherTitre(idJeu) {
-    console.log(gamesArray[idJeu]);
+function afficherInfos(idJeu) {
     document.getElementById("nomJeuSelectionne").innerHTML = gamesArray[idJeu].Name;
     document.getElementById("descriptionJeuSelectionne").innerHTML = gamesArray[idJeu].Abstract;
     document.getElementById("typeJeuSelectionne").innerHTML = gamesArray[idJeu].Type;
@@ -23,7 +22,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
     let i = 1;
     let jeuStr = "jeu";
     while (document.getElementById(jeuStr.concat(i)) !== null) {
-        document.getElementById(jeuStr.concat(i)).addEventListener('click', afficherTitre.bind(this, i), false);
+        document.getElementById(jeuStr.concat(i)).addEventListener('click', afficherInfos.bind(this, i), false);
         // .bind to adjust the scope of the function/parameters
         i++;
     }

@@ -5,7 +5,7 @@
     <title>Ludotheque - Recherche</title>
     <link rel="stylesheet" href="accueilSS.css">
     <link rel="shortcut icon" href="favicon.ico">
-    <script src="reservation.js"></script>
+    <script src="afficherInfos.js"></script>
 
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <?php
@@ -151,14 +151,14 @@
                                         while ($Data = mysqli_fetch_array($Result)) {
                                             if ($nbColonnes < $nbColonnesMax) {
                                                 $stringIDJeu = "jeu" . $numJeu;
-                                                $stringHref = "#?idJeu=" . $Data[0];
+                                                $stringHref = "?idJeu=" . $Data[0];
                                                 echo "
                                                     <td><a href='$stringHref'><img id='$stringIDJeu' class='jeu' title='$Data[1]' src='$Data[6]' alt='$Data[1]'></a></td>";
                                                 $nbColonnes++;
                                                 $numJeu++;
                                             } else {
                                                 $stringIDJeu = "jeu" . $numJeu;
-                                                $stringHref = "#?idJeu=" . $Data[0];
+                                                $stringHref = "?idJeu=" . $Data[0];
                                                 echo "</tr><tr>
                                                     <td><a href='$stringHref'><img id='$stringIDJeu' class='jeu' title='$Data[1]' src='$Data[6]' alt='$Data[1]'></a></td>";
                                                 $nbColonnes = 1;
@@ -205,14 +205,14 @@
                                         while ($Data = mysqli_fetch_array($Result)) {
                                             if ($nbColonnes < $nbColonnesMax) {
                                                 $stringIDJeu = "jeu" . $numJeu;
-                                                $stringHref = "#?idJeu=" . $Data[0];
+                                                $stringHref = "?idJeu=" . $Data[0];
                                                 echo "
                                                     <td><a href='$stringHref'><img id='$stringIDJeu' class='jeu' title='$Data[1]' src='$Data[6]' alt='$Data[1]'></a></td>";
                                                 $nbColonnes++;
                                                 $numJeu++;
                                             } else {
                                                 $stringIDJeu = "jeu" . $numJeu;
-                                                $stringHref = "#?idJeu=" . $Data[0];
+                                                $stringHref = "?idJeu=" . $Data[0];
                                                 echo "</tr><tr>
                                                     <td><a href='$stringHref'><img id='$stringIDJeu' class='jeu' title='$Data[1]' src='$Data[6]' alt='$Data[1]'></a></td>";
                                                 $nbColonnes = 1;
@@ -243,14 +243,14 @@
                                         while ($Data = mysqli_fetch_array($Result)) {
                                             if ($nbColonnes < $nbColonnesMax) {
                                                 $stringIDJeu = "jeu" . $numJeu;
-                                                $stringHref = "#?idJeu=" . $Data[0];
+                                                $stringHref = "?idJeu=" . $Data[0];
                                                 echo "
                                                 <td><a href='$stringHref'><img id='$stringIDJeu' class='jeu' title='$Data[1]' src='$Data[6]' alt='$Data[1]'></a></td>";
                                                 $nbColonnes++;
                                                 $numJeu++;
                                             } else {
                                                 $stringIDJeu = "jeu" . $numJeu;
-                                                $stringHref = "#?idJeu=" . $Data[0];
+                                                $stringHref = "?idJeu=" . $Data[0];
                                                 echo "</tr><tr>
                                                 <td><a href='$stringHref'><img id='$stringIDJeu' class='jeu' title='$Data[1]' src='$Data[6]' alt='$Data[1]'></a></td>";
                                                 $nbColonnes = 1;
@@ -281,16 +281,19 @@
         <p id="typeJeuSelectionne"></p>
         <h4>Tranche d'age : </h4>
         <p id="trancheAgeJeuSelectionne"></p>
-        <form action="pageRecherche.php" method="post">
+        <form action="" method="post">
             <input type="submit" name="reserveButton" id="reserveButton" value="Réserver">
         </form>
     </div>
     <?php
     if (isset($_POST["reserveButton"])) {
-        echo $_GET['idJeu'];
-        $Query = "INSERT INTO booking (IDMember, IDGame, Date, ReturnDate) VALUES ($_GET[idJeu], 2, 2021-06-06, 2021-07-06)";
-        // $Connect->query($Query);
-        echo "Reservation pour 1 mois prise en compte";
+        $today = date('Y-m-d');
+        $tomorrowRaw = mktime(0, 0, 0, date('m')+1, date('d'), date('Y'));
+        $tomorrow = date('Y-m-d', $tomorrowRaw);
+        $Query = "INSERT INTO booking (IDMember, IDGame, Date, ReturnDate) VALUES (1, $_GET[idJeu], '$today', '$tomorrow')";
+        // echo $Query;
+        $Connect->query($Query);
+        echo "</br>Reservation pour 1 mois prise en compte";
     }
 
     // while($Data = mysqli_fetch_array($Result))

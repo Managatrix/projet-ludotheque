@@ -29,7 +29,7 @@
             <li id="admin"><a href="pageAdmin.php">Admin</a></li>
         </ul>
     </nav>
-    <form class="connexion" action="pageConnexion.php" method="post">
+    <form class="connexion" action="" method="post">
         <div><label for="identifiant">Identifiant</label></div>
         <div><input type="text" name="identifiant" id="identifiant"></div>
         <div><input type="submit" value="Se Connecter"></div>

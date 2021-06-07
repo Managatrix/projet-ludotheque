@@ -40,7 +40,7 @@
     </nav>
     <div class="col">
         <h3 class="formTitle">Ajouter une nouvelle fiche de jeu</h3>
-        <form action="pageAdmin.php" method="post">
+        <form action="" method="post">
             <ul>
                 <li>
                     <label for="gameName">Nom du jeu</label>
@@ -86,7 +86,7 @@
     <div class="col">
         </form>
         <h3 class="formTitle">Ajouter un nouveau membre</h3>
-        <form action="pageAdmin.php" method="post">
+        <form action="" method="post">
             <ul>
                 <li>
                     <label for="memberName">Nom</label>

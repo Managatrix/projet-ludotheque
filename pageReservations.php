@@ -33,7 +33,7 @@
         <tr>
             <td>
                 <ul class="filtres">
-                    <form action="pageRecherche.php" method="POST">
+                    <form action="" method="POST">
                         <li>
                             <h4>Filtres</h4>
                         </li>
