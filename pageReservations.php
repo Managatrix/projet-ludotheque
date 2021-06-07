@@ -19,7 +19,7 @@
     if (!$Connect) {
         echo "Connexion à la base impossible";
     }
-    session_start();
+    session_start(); //Utilisation d'une session pour garder l'IDMember jusqu'à ce qu'on quitte pageReservations.php
     ?>
 </head>
 
@@ -275,8 +275,24 @@
         <p id="typeJeuSelectionne"></p>
         <h4>Tranche d'age : </h4>
         <p id="trancheAgeJeuSelectionne"></p>
+        <form action="" method="post">
+            <input type="submit" name="returnButton" id="returnButton" value="Retourner le jeu">
+        </form>
     </div>
     <?php
+    if (isset($_POST["returnButton"])) {
+        $today = date('Y-m-d');
+        $tomorrowRaw = mktime(0, 0, 0, date('m') + 1, date('d'), date('Y'));
+        $tomorrow = date('Y-m-d', $tomorrowRaw);
+
+        $Query = "SELECT IDMember FROM member WHERE Name = '$_SESSION[memberName]'"; //Correspondance IDMember avec Name
+        $Result = $Connect->query($Query);
+        $idMember = mysqli_fetch_array($Result);
+
+        $Query = "DELETE FROM booking WHERE IDMember = $idMember[0] AND IDGame = $_GET[idJeu]";
+        $Connect->query($Query);
+        echo "<center class='success'>Le retour a été pris en compte</br>Rechargez la page pour voir l'effet</center>";
+    }
     // while($Data = mysqli_fetch_array($Result))
     // {
     //     echo "IDGame : $Data[0], Name : $Data[1], AgeMin : $Data[2], AgeMax : $Data[3], Type : $Data[4], Abstract : $Data[5], ImagePath : $Data[6]</br></br>";

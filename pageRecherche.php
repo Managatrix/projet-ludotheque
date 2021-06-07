@@ -296,7 +296,6 @@
                 $idMember = mysqli_fetch_array($Result);
 
                 $Query = "INSERT INTO booking (IDMember, IDGame, Date, ReturnDate) VALUES ($idMember[0], $_GET[idJeu], '$today', '$tomorrow')";
-                echo $Query;
                 $Connect->query($Query);
                 echo "<center class='success'>Reservation pour 1 mois prise en compte</center>";
             } else {
