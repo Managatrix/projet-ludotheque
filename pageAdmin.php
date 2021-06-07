@@ -32,7 +32,7 @@
 
     <nav class="header">
         <ul>
-            <li><a href="pageAccueil.php">Accueil</a></li>
+            <li><a href="pageAccueil.htm">Accueil</a></li>
             <li><a href="pageConnexion.php">Mes Réservations</a></li>
             <li><a href="pageRecherche.php">Recherche</a></li>
             <li class="active" id="admin"><a href="pageAdmin.php">Admin</a></li>
@@ -73,12 +73,13 @@
                 $idJeu = $DataGame[0] + 1;
                 $imagePath = $_POST['gameName'] . "Image.jpg";
                 $Query = "INSERT INTO game (IDGame, Name, AgeMin, AgeMax, Type, Abstract, ImagePath, NbPersonnes) VALUES ($idJeu, '$_POST[gameName]', $_POST[minAge], $_POST[maxAge], '$_POST[gameType]', '$_POST[abstract]', '$imagePath', NULL)";
-                // echo $Query;
+
                 if (strpos($_POST['abstract'], "'") !== false) {
                     echo "</br></br>Reqête invalide car apostrophe dans description";
                 }
                 //Envoi de la requête
                 $Connect->query($Query);
+                echo "<center class='success'>Nouveau fiche de jeu entrée</center>";
             }
             ?>
 
@@ -110,9 +111,9 @@
             //Ecriture de la requête
             $idMembre = $DataMember[0] + 1;
             $Query = "INSERT INTO member (IDMember, Name, EMailAddress) VALUES ($idMembre, '$_POST[memberName]', '$_POST[memberAddress]')";
-            // echo $Query;
             //Envoi de la requête
             $Connect->query($Query);
+            echo "<center class='success'>Nouveau membre créé</center>";
         }
         mysqli_close($Connect);
         ?>

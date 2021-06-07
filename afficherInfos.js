@@ -3,7 +3,7 @@ function afficherInfos(idJeu) {
     document.getElementById("descriptionJeuSelectionne").innerHTML = gamesArray[idJeu].Abstract;
     document.getElementById("typeJeuSelectionne").innerHTML = gamesArray[idJeu].Type;
     document.getElementById("trancheAgeJeuSelectionne").innerHTML = gamesArray[idJeu].AgeMin + " - " + gamesArray[idJeu].AgeMax;
-    if (document.getElementById("dateRetourJeuSelectionne")) {
+    if (document.getElementById("dateRetourJeuSelectionne")) { //When used by pageReservations.php
         document.getElementById("dateRetourJeuSelectionne").innerHTML = gamesArray[idJeu].DateRetour;
     }
 
@@ -22,7 +22,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
         document.getElementById("descriptionJeuSelectionne").innerHTML = localStorage.getItem('abstract');
         document.getElementById("typeJeuSelectionne").innerHTML = localStorage.getItem('type');
         document.getElementById("trancheAgeJeuSelectionne").innerHTML = localStorage.getItem('ageMin') + " - " + localStorage.getItem('ageMax');
-        if (document.getElementById("dateRetourJeuSelectionne")) {
+        if (document.getElementById("dateRetourJeuSelectionne")) { //When used by pageReservations.php
             document.getElementById("dateRetourJeuSelectionne").innerHTML = localStorage.getItem('dateRetour');
         }
     }

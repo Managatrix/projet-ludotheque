@@ -19,14 +19,14 @@
     if (!$Connect) {
         echo "Connexion à la base impossible";
     }
-    session_start(); //Utilisation d'une session pour garder l'IDMember jusqu'à ce qu'on quitte pageReservations.php
+    session_start(); //Utilisation d'une session pour garder l'IDMember jusqu'à ce qu'on quitte pageReservations.php => pas de session_abort()
     ?>
 </head>
 
 <body>
     <nav class="header">
         <ul>
-            <li><a href="pageAccueil.php">Accueil</a></li>
+            <li><a href="pageAccueil.htm">Accueil</a></li>
             <li class="active"><a href="pageConnexion.php">Mes Réservations</a></li>
             <li><a href="pageRecherche.php">Recherche</a></li>
             <li id="admin"><a href="pageAdmin.php">Admin</a></li>
@@ -119,9 +119,6 @@
                                     $numJeu = 1;
                                     //Traitement de la réponse
 
-                                    // /!\ UTILISER AJAX POUR LES FONCTION ONCLICK
-
-
                                     if (isset($_POST['recherche'])) {
                                         $Query = "SELECT * FROM game INNER JOIN booking ON game.IDGame = booking.IDGame INNER JOIN member ON member.IDMember = booking.IDMember WHERE (member.Name = '$_SESSION[memberName]') AND (Abstract LIKE '%$_POST[recherche]%' OR game.Name like '%$_POST[recherche]%' OR Type LIKE '%$_POST[recherche]%')";
                                         $Result = $Connect->query($Query);
@@ -161,7 +158,6 @@
                                             }
                                         }
                                     } else if (isset($_POST['ageMin'])) {
-
                                         $checkboxSQL = "";
                                         if (isset($_POST['checkbox'])) {
                                             foreach ($_POST["checkbox"] as $index => $checkbox) {
@@ -177,7 +173,6 @@
                                         }
 
                                         $Query = "SELECT * FROM game INNER JOIN booking ON game.IDGame = booking.IDGame INNER JOIN member ON member.IDMember = booking.IDMember WHERE member.Name = '$_SESSION[memberName]' AND AgeMin >= $_POST[ageMin] AND AgeMax <= $_POST[ageMax] " . $checkboxSQL;
-
                                         $Result = $Connect->query($Query);
                                         while ($Data = mysqli_fetch_array($Result)) {
                                         ?>
@@ -266,9 +261,7 @@
             </td>
             <td>
             </td>
-
             <!-- </tr> -->
-
     </table>
     <div class="rcolumn">
         <h4>Jeu selectionné : </h4>
@@ -295,12 +288,6 @@
         $Connect->query($Query);
         echo "<center class='success'>Le retour a été pris en compte</br>Rechargez la page pour voir l'effet</center>";
     }
-    // while($Data = mysqli_fetch_array($Result))
-    // {
-    //     echo "IDGame : $Data[0], Name : $Data[1], AgeMin : $Data[2], AgeMax : $Data[3], Type : $Data[4], Abstract : $Data[5], ImagePath : $Data[6]</br></br>";
-    // }
-
-    // session_abort();
     mysqli_close($Connect);
     ?>
 </body>

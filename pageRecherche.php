@@ -25,7 +25,7 @@
 <body>
     <nav class="header">
         <ul>
-            <li><a href="pageAccueil.php">Accueil</a></li>
+            <li><a href="pageAccueil.htm">Accueil</a></li>
             <li><a href="pageConnexion.php">Mes Réservations</a></li>
             <li class="active"><a href="pageRecherche.php">Recherche</a></li>
             <li id="admin"><a href="pageAdmin.php">Admin</a></li>
@@ -117,9 +117,6 @@
                                     $numJeu = 1;
                                     //Traitement de la réponse
 
-                                    // /!\ UTILISER AJAX POUR LES FONCTION ONCLICK
-
-
                                     if (isset($_POST['recherche'])) {
                                         $Query = "SELECT * FROM game WHERE Abstract LIKE '%$_POST[recherche]%' OR Name like '%$_POST[recherche]%' OR Type LIKE '%$_POST[recherche]%'";
                                         $Result = $Connect->query($Query);
@@ -159,7 +156,6 @@
                                             }
                                         }
                                     } else if (isset($_POST['ageMin'])) {
-
                                         $checkboxSQL = "";
                                         if (isset($_POST['checkbox'])) {
                                             foreach ($_POST["checkbox"] as $index => $checkbox) {
@@ -175,7 +171,6 @@
                                         }
 
                                         $Query = "SELECT * FROM game WHERE AgeMin >= $_POST[ageMin] AND AgeMax <= $_POST[ageMax] " . $checkboxSQL;
-
                                         $Result = $Connect->query($Query);
                                         while ($Data = mysqli_fetch_array($Result)) {
                                         ?>
@@ -260,9 +255,7 @@
             </td>
             <td>
             </td>
-
             <!-- </tr> -->
-
     </table>
     <div class="rcolumn">
         <h4>Jeu selectionné : </h4>
@@ -282,7 +275,7 @@
     <?php
     if (isset($_POST["reserveButton"])) {
         if ($_POST['identifiant'] == null) {
-            echo "<center class='failure'>Il faut se connecter !</center>";
+            echo "<center class='failure'>Il faut se connecter!</center>";
         } else {
             $Query = "SELECT Name FROM member WHERE Name = '$_POST[identifiant]'";
             $Result = $Connect->query($Query);
@@ -309,7 +302,6 @@
             }
         }
     }
-
     // while($Data = mysqli_fetch_array($Result))
     // {
     //     echo "IDGame : $Data[0], Name : $Data[1], AgeMin : $Data[2], AgeMax : $Data[3], Type : $Data[4], Abstract : $Data[5], ImagePath : $Data[6]</br></br>";

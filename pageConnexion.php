@@ -23,7 +23,7 @@
 <body>
     <nav class="header">
         <ul>
-            <li><a href="pageAccueil.php">Accueil</a></li>
+            <li><a href="pageAccueil.htm">Accueil</a></li>
             <li><a href="pageConnexion.php">Mes Réservations</a></li>
             <li><a href="pageRecherche.php">Recherche</a></li>
             <li id="admin"><a href="pageAdmin.php">Admin</a></li>
