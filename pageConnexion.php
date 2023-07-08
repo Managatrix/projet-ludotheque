@@ -10,7 +10,7 @@
     //paramètres de connexion à la base de données
     $Server = "localhost";
     $User = "root";
-    $Pwd = "";
+    $Pwd = "root";
     $DB = "projet-ludotheque";
     //connexion au serveur où se trouve la base de données
     $Connect = mysqli_connect($Server, $User, $Pwd, $DB);
@@ -23,7 +23,7 @@
 <body>
     <nav class="header">
         <ul>
-            <li><a href="pageAccueil.htm">Accueil</a></li>
+            <li><a href="index.htm">Accueil</a></li>
             <li><a href="pageConnexion.php">Mes Réservations</a></li>
             <li><a href="pageRecherche.php">Recherche</a></li>
             <li id="admin"><a href="pageAdmin.php">Admin</a></li>

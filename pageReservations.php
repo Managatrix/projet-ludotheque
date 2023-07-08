@@ -12,7 +12,7 @@
     //paramètres de connexion à la base de données
     $Server = "localhost";
     $User = "root";
-    $Pwd = "";
+    $Pwd = "root";
     $DB = "projet-ludotheque";
     //connexion au serveur où se trouve la base de données
     $Connect = mysqli_connect($Server, $User, $Pwd, $DB);
@@ -26,7 +26,7 @@
 <body>
     <nav class="header">
         <ul>
-            <li><a href="pageAccueil.htm">Accueil</a></li>
+            <li><a href="index.htm">Accueil</a></li>
             <li class="active"><a href="pageConnexion.php">Mes Réservations</a></li>
             <li><a href="pageRecherche.php">Recherche</a></li>
             <li id="admin"><a href="pageAdmin.php">Admin</a></li>
@@ -159,16 +159,16 @@
                                     while ($Data = mysqli_fetch_array($Result)) {
                                         if ($nbColonnes < $nbColonnesMax) {
                                             $stringIDJeu = "jeu" . $numJeu;
-                                            $stringHref = "#?idJeu=" . $Data[0];
+                                            $stringHref = "#?idJeu=" . $Data[0]; //Le # empêche la méthode GET, et si on l'enlève, la page se recharge, ce qui rend les filtres temporaires
                                             echo "
-                                            <td><a href='$stringHref'><img id='$stringIDJeu' class='jeu' title='$Data[1]' src='$Data[6]' alt='$Data[1]'></a></td>";
+                                            <td><a href='$stringHref'><img id='$stringIDJeu' class='jeu' title='$Data[1]' src='images/$Data[6]' alt='$Data[1]'></a></td>";
                                             $nbColonnes++;
                                             $numJeu++;
                                         } else {
                                             $stringIDJeu = "jeu" . $numJeu;
-                                            $stringHref = "#?idJeu=" . $Data[0];
+                                            $stringHref = "#?idJeu=" . $Data[0]; //Le # empêche la méthode GET, et si on l'enlève, la page se recharge, ce qui rend les filtres temporaires
                                             echo "</tr><tr>
-                                            <td><a href='$stringHref'><img id='$stringIDJeu' class='jeu' title='$Data[1]' src='$Data[6]' alt='$Data[1]'></a></td>";
+                                            <td><a href='$stringHref'><img id='$stringIDJeu' class='jeu' title='$Data[1]' src='images/$Data[6]' alt='$Data[1]'></a></td>";
                                             $nbColonnes = 1;
                                             $numJeu++;
                                         }
